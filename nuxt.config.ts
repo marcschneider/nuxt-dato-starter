@@ -5,4 +5,7 @@ export default defineNuxtConfig({
       datoCmsToken: process.env.DATO_CMS_TOKEN,
     }
   },
+  nitro: {
+    preset: 'netlify_edge',
+  },
 })
