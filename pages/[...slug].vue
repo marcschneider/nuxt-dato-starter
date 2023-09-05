@@ -14,6 +14,7 @@ const matchingSlugsQuery = `
     allPages(filter: {slug: {eq: $slug}}) {
       id
       slug
+      pageName
       children {
         id
         slug
@@ -71,12 +72,12 @@ findMatch(data.value.allPages)
 <template>
   <div v-if="error">Something bad happened!</div>
   <div class="m-2 flex flex-row w-full gap-2" v-else>
-    <!-- <div
+    <div
       class="cursor-pointer hover:bg-green-300 transition text-md px-4 py-1 bg-green-200 text-green-800 rounded-md font-medium"
       v-for="page in data.allPages"
       :key="page.id"
     >
       {{ page.pageName }}
-    </div> -->
+    </div>
   </div>
 </template>
