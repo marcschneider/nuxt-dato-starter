@@ -22,7 +22,7 @@ const matchingSlugsQuery = `
     }
   }
 `
-const {data, error} = await useGraphqlQuery({
+const {data: matchingSlugsData, error: matchingSlugsDataError} = await useGraphqlQuery({
   query: matchingSlugsQuery,
   variables: {
     slug: lastRouteItem,
@@ -32,52 +32,35 @@ const {data, error} = await useGraphqlQuery({
 // 4. Loop trough all results and check if the children slugs match the rest of the slugs
 const findMatch = function (pages) {
   for(const page of pages) {
-    console.log(page);
+    return page.id
   }
 }
 
-findMatch(data.value.allPages)
+const matchId = findMatch(matchingSlugsData.value.allPages)
 
 // 5. If a result was found load the content of the page id
+const contentQuery = `
+  query ($id: ItemId = "") {
+    page(filter: {id: {eq: $id}}) {
+      pageName
+      id
+    }
+  }
+`
 
-/////////////////
-
-// const allPagesQuery = `
-//   query ($hasParent: BooleanType) {
-//     allPages(filter: {parent: {exists: $hasParent}}) {
-//       id
-//       slug
-//       pageName
-//       children {
-//         id
-//         slug
-//         children {
-//           id
-//           slug
-//         }
-//       }
-//     }
-//   }
-// `;
-
-// const { data, error } = await useGraphqlQuery({
-//   query: allPagesQuery,
-//   variables: {
-//     hasParent: false,
-//   },
-// })
-
+const {data: contentData, error: contentError} = await useGraphqlQuery({
+  query: contentQuery,
+  variables: {
+    id: matchId,
+  },
+})
 </script>
 
 <template>
-  <div v-if="error">Something bad happened!</div>
+  <div v-if="matchingSlugsDataError || contentError ">Something bad happened!</div>
   <div class="m-2 flex flex-row w-full gap-2" v-else>
-    <div
-      class="cursor-pointer hover:bg-green-300 transition text-md px-4 py-1 bg-green-200 text-green-800 rounded-md font-medium"
-      v-for="page in data.allPages"
-      :key="page.id"
-    >
-      {{ page.pageName }}
+    <div class="cursor-pointer hover:bg-green-300 transition text-md px-4 py-1 bg-green-200 text-green-800 rounded-md font-medium">
+      {{ contentData.page }}
     </div>
   </div>
 </template>
