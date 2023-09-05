@@ -1,7 +1,4 @@
 <script setup>
-
-// Steps
-
 // 1. Get full url
 const route = useRoute()
 
@@ -47,7 +44,6 @@ const contentQuery = `
     }
   }
 `
-
 const {data: contentData, error: contentError} = await useGraphqlQuery({
   query: contentQuery,
   variables: {
@@ -60,7 +56,7 @@ const {data: contentData, error: contentError} = await useGraphqlQuery({
   <div v-if="matchingSlugsDataError || contentError ">Something bad happened!</div>
   <div class="m-2 flex flex-row w-full gap-2" v-else>
     <div class="cursor-pointer hover:bg-green-300 transition text-md px-4 py-1 bg-green-200 text-green-800 rounded-md font-medium">
-      {{ contentData.page }}
+      {{ contentData.page.pageName }} – {{ contentData.page.id }}      
     </div>
   </div>
 </template>
