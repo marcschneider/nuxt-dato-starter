@@ -5,6 +5,9 @@ export default defineNuxtConfig({
       datoCmsToken: process.env.DATO_CMS_TOKEN,
     }
   },
+  modules: [
+    '@nuxtjs/tailwindcss',
+  ],
   nitro: {
     preset: 'netlify_edge',
   },
