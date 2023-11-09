@@ -11,7 +11,6 @@ const matchingSlugsQuery = `
     allPages(filter: {slug: {eq: $slug}}) {
       id
       slug
-      pageName
       children {
         id
         slug
@@ -28,6 +27,7 @@ const {data: matchingSlugsData, error: matchingSlugsDataError} = await useGraphq
 
 // 4. Loop trough all results and check if the children slugs match the rest of the slugs
 const findMatch = function (pages) {
+  console.log(pages);
   for(const page of pages) {
     return page.id
   }
