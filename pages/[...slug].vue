@@ -32,13 +32,19 @@ const {data: matchingSlugsData, error: matchingSlugsDataError} = await useGraphq
 
 // Loop trough all results and check if the parent slugs match the rest of the slugs
 const findMatch = function (pages) {
+  let mostSpecificMatch = null;
+
   for (const page of pages) {
     // Check if parent slugs match the expected hierarchy
-    if (checkParentHierarchy(page)) {
-      return page.id;
+    const isMatch = checkParentHierarchy(page);
+
+    if (isMatch && (!mostSpecificMatch || page.parent === null)) {
+      // Update the most specific match if the current page is a better match
+      mostSpecificMatch = page.id;
     }
   }
-  return null; // Return null if no match is found
+
+  return mostSpecificMatch;
 };
 
 const checkParentHierarchy = function (page) {
