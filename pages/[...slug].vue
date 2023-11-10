@@ -7,14 +7,10 @@ const isRootPage = routeParams.length === 0
 if (isRootPage)
   lastRouteItem = ''
 
-// Make a query that searches for the last part of the url and load the id, slug, pageName, parent
-const matchingSlugsQuery = `
-  query ($slug: String) {
-    allPages(filter: {slug: {eq: $slug}}) {
-      id
-      slug
-      pageName
-      parent {
+async function fetchMatchingSlugs() {
+  const matchingSlugsQuery = `
+    query ($slug: String) {
+      allPages(filter: {slug: {eq: $slug}}) {
         id
         slug
         pageName
@@ -22,20 +18,47 @@ const matchingSlugsQuery = `
           id
           slug
           pageName
+          parent {
+            id
+            slug
+            pageName
+          }
         }
       }
     }
-  }
-`
-const { data: matchingSlugsData, error: matchingSlugsDataError } = await useGraphqlQuery({
-  query: matchingSlugsQuery,
-  variables: {
-    slug: lastRouteItem,
-  },
-})
+  `
 
-// Loop trough all results and check if the parent slugs match the rest of the slugs
-const checkParentHierarchy = function (page) {
+  const { data, error } = await useGraphqlQuery({
+    query: matchingSlugsQuery,
+    variables: {
+      slug: lastRouteItem,
+    },
+  })
+
+  return { data, error }
+}
+
+async function fetchContent(matchId) {
+  const contentQuery = `
+    query ($id: ItemId = "") {
+      page(filter: {id: {eq: $id}}) {
+        pageName
+        id
+      }
+    }
+  `
+
+  const { data, error } = await useGraphqlQuery({
+    query: contentQuery,
+    variables: {
+      id: matchId,
+    },
+  })
+
+  return { data, error }
+}
+
+function checkParentHierarchy(page) {
   let currentPage = page
 
   for (let index = routeParams.length - 2; index >= 0; index--) {
@@ -48,39 +71,22 @@ const checkParentHierarchy = function (page) {
   return true
 }
 
-const findMatch = function (pages) {
-  let mostSpecificMatch = null
+function findMatch(pages) {
+  let bestMatchId = null
 
   for (const page of pages) {
-    // Check if parent slugs match the expected hierarchy
     const isMatch = checkParentHierarchy(page)
 
-    if (isMatch && (!mostSpecificMatch || page.parent === null)) {
-      // Update the most specific match if the current page is a better match
-      mostSpecificMatch = page.id
-    }
+    if (isMatch && (!bestMatchId || page.parent === null))
+      bestMatchId = page.id
   }
 
-  return mostSpecificMatch
+  return bestMatchId
 }
 
-const matchId = findMatch(matchingSlugsData.value.allPages)
-
-// If a result was found load the content of the page id
-const contentQuery = `
-  query ($id: ItemId = "") {
-    page(filter: {id: {eq: $id}}) {
-      pageName
-      id
-    }
-  }
-`
-const { data: contentData, error: contentError } = await useGraphqlQuery({
-  query: contentQuery,
-  variables: {
-    id: matchId,
-  },
-})
+const { data: matchingSlugsData, error: matchingSlugsDataError } = await fetchMatchingSlugs()
+const bestMatchId = findMatch(matchingSlugsData.value.allPages)
+const { data: contentData, error: contentError } = await fetchContent(bestMatchId)
 </script>
 
 <template>
