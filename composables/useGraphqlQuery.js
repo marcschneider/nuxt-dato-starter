@@ -1,7 +1,8 @@
+/* eslint-disable new-cap */
 export default (options) => {
-  const { query, variables = {} } = options;
-  const runtimeConfig = useRuntimeConfig();
-  const key = JSON.stringify(options);
+  const { query, variables = {} } = options
+  const runtimeConfig = useRuntimeConfig()
+  const key = JSON.stringify(options)
   return useFetch('https://graphql.datocms.com', {
     key,
     method: 'POST',
@@ -12,10 +13,11 @@ export default (options) => {
       query,
       variables,
     },
-    transform: ({ data, errors }) => { 
-      if(errors) throw new errors;
-      
-      return data;
-     },
-  });
-};
+    transform: ({ data, errors }) => {
+      if (errors)
+        throw new errors()
+
+      return data
+    },
+  })
+}
