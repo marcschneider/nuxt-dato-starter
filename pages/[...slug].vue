@@ -7,6 +7,36 @@ const isRootPage = routeParams.length === 0
 if (isRootPage)
   lastRouteItem = ''
 
+///////////
+
+async function loadSpecialSlugs() {
+  const specialSlugsQuery = `
+    query {
+      setting {
+        specialSlugBlog
+        specialSlugTeam
+      }
+    }
+  `
+
+  const { data, error } = await useGraphqlQuery({
+    query: specialSlugsQuery,
+  })
+
+  return { data, error }
+}
+
+// function checkSpecialSlugs(slugs) {
+//   slugs.forEach((slug) => {
+//     console.log(slug)
+//   })
+// }
+
+const { data: specialSlugsData } = await loadSpecialSlugs()
+console.log(await specialSlugsData.value.setting)
+
+///////////
+
 async function fetchMatchingSlugs() {
   const matchingSlugsQuery = `
     query ($slug: String) {
