@@ -1,7 +1,7 @@
 <script setup>
-const route = useRoute()
-const routeParams = route.path.split('/').filter(Boolean)
-let lastRouteItem = routeParams[routeParams.length - 1]
+const route = useRoute();
+const routeParams = route.path.split('/').filter(Boolean);
+let lastRouteItem = routeParams[routeParams.length - 1];
 const isRootPage = routeParams.length === 0;
 
 if(isRootPage) {
@@ -27,13 +27,13 @@ const matchingSlugsQuery = `
       }
     }
   }
-`
+`;
 const {data: matchingSlugsData, error: matchingSlugsDataError} = await useGraphqlQuery({
   query: matchingSlugsQuery,
   variables: {
     slug: lastRouteItem,
   },
-})
+});
 
 // Loop trough all results and check if the parent slugs match the rest of the slugs
 const findMatch = function (pages) {
@@ -65,7 +65,7 @@ const checkParentHierarchy = function (page) {
   return true;
 }
 
-const matchId = findMatch(matchingSlugsData.value.allPages)
+const matchId = findMatch(matchingSlugsData.value.allPages);
 
 // If a result was found load the content of the page id
 const contentQuery = `
@@ -75,13 +75,13 @@ const contentQuery = `
       id
     }
   }
-`
+`;
 const {data: contentData, error: contentError} = await useGraphqlQuery({
   query: contentQuery,
   variables: {
     id: matchId,
   },
-})
+});
 </script>
 
 <template>
