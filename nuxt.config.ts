@@ -7,6 +7,7 @@ export default defineNuxtConfig({
   },
   modules: [
     '@nuxtjs/tailwindcss',
+    '@nuxtjs/html-validator',
   ],
   nitro: {
     preset: 'netlify_edge',

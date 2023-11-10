@@ -88,7 +88,7 @@ const {data: contentData, error: contentError} = await useGraphqlQuery({
   <div v-if="matchingSlugsDataError || contentError" class="text-red-800">Something bad happened!</div>
   <div v-else class="m-2 flex flex-row gap-2">
     <div class="cursor-pointer hover:bg-green-300 transition text-md px-4 py-1 bg-green-200 text-green-800 rounded-md font-medium">
-      {{ contentData.page.pageName }} – {{ contentData.page.id }}      
+      {{ contentData.page.pageName }} – {{ contentData.page.id }}
     </div>
   </div>
 </template>
