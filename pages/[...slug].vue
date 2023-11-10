@@ -26,14 +26,15 @@ async function loadSpecialSlugs() {
   return { data, error }
 }
 
-// function checkSpecialSlugs(slugs) {
-//   slugs.forEach((slug) => {
-//     console.log(slug)
-//   })
-// }
+function checkSpecialSlugs(slugs) {
+  console.log(routeParams)
+  for (const slug in slugs)
+    console.log(slugs[slug])
+}
 
 const { data: specialSlugsData } = await loadSpecialSlugs()
-console.log(await specialSlugsData.value.setting)
+
+checkSpecialSlugs(specialSlugsData.value.setting)
 
 ///////////
 
