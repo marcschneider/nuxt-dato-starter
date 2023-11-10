@@ -1,7 +1,12 @@
 <script setup>
 const route = useRoute()
 const routeParams = route.path.split('/').filter(Boolean)
-const lastRouteItem = routeParams[routeParams.length - 1]
+let lastRouteItem = routeParams[routeParams.length - 1]
+const isRootPage = routeParams.length === 0;
+
+if(isRootPage) {
+  lastRouteItem = '';
+}
 
 // Make a query that searches for the last part of the url and load the id, slug, pageName, parent
 const matchingSlugsQuery = `
