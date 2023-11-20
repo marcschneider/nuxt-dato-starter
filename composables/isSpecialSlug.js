@@ -6,14 +6,6 @@ export default async function () {
   const lastRouteItemChache = routeParams.pop()
   const routeString = routeParams.join('/')
 
-  async function loadSpecialSlugs() {
-    const { data, error } = await useGraphqlQuery({
-      query: specialSlugsQuery,
-    })
-
-    return { data, error }
-  }
-
   function checkSpecialSlugs(slugs) {
     for (const slug in slugs) {
       const specialSlug = slugs[slug].replace(/^\/|\/$/g, '')
@@ -22,9 +14,11 @@ export default async function () {
     }
   }
 
-  const { data: specialSlugsData } = await loadSpecialSlugs()
+  const { data } = await useGraphqlQuery({
+    query: specialSlugsQuery,
+  })
 
-  const special = checkSpecialSlugs(specialSlugsData.value.setting)
+  const special = checkSpecialSlugs(data.value.setting)
 
   if (special)
     return 'special'
