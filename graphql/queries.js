@@ -5,7 +5,7 @@ export const matchingSlugsQuery = `
       slug      
       parent {
         id
-        slug        
+        slug
         parent {
           id
           slug          
