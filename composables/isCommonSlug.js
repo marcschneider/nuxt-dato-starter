@@ -10,45 +10,21 @@ export default async function () {
     lastRouteItem = ''
 
   function checkParentHierarchy(page) {
-    let currentPage = page
-
-    for (let index = routeParams.length - 2; index >= 0; index--) {
-      if (!currentPage.parent || currentPage.parent.slug !== routeParams[index])
-        return false
-
-      currentPage = currentPage.parent
-    }
-
-    return true
-  }
-
-  function findMatch(pages) {
-    let bestMatchId = null
-
-    for (const page of pages) {
-      const isMatch = checkParentHierarchy(page)
-
-      if (isMatch && (!bestMatchId || page.parent === null))
-        bestMatchId = page.id
-    }
-
-    return bestMatchId
-  }
-
-  async function fetchMatchingSlugs() {
-    const { data, error } = await useGraphqlQuery({
-      query: matchingSlugsQuery,
-      variables: {
-        slug: lastRouteItem,
-      },
+    return routeParams.slice(0, -1).every((param, index) => {
+      return page.parent && page.parent.slug === routeParams[index]
     })
-
-    return { data, error }
   }
 
-  const { data } = await fetchMatchingSlugs()
+  function findMatchId(pages) {
+    return pages.find(page => checkParentHierarchy(page) && page.parent === null)?.id
+  }
 
-  const bestMatchId = findMatch(data.value.allPages)
+  const { data } = await useGraphqlQuery({
+    query: matchingSlugsQuery,
+    variables: {
+      slug: lastRouteItem,
+    },
+  })
 
-  return bestMatchId
+  return findMatchId(data.value.allPages)
 }
