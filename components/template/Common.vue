@@ -1,12 +1,12 @@
 <script setup>
 defineProps({
-  content: Object,
+  pageData: Object,
 })
 </script>
 
 <template>
-  <h1>Common</h1>
+  <h1>{{ pageData.title }}</h1>
   <div>
-    {{ content }}
+    {{ pageData.content }}
   </div>
 </template>

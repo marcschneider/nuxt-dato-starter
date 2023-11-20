@@ -28,6 +28,16 @@ export const commonContentQuery = `
   query ($id: ItemId) {
     page(filter: {id: {eq: $id}}) {
       title
+      content {
+        ... on SectionLeadRecord {
+          _modelApiKey
+          text
+        }
+        ... on SectionTitleRecord {
+          _modelApiKey
+          title
+        }
+      }
     }
   }
 `
@@ -36,6 +46,16 @@ export const teamContentQuery = `
   query ($slug: String) {
     team(filter: {slug: {eq: $slug}}) {
       title
+      content {
+        ... on SectionLeadRecord {
+          _modelApiKey
+          text
+        }
+        ... on SectionTitleRecord {
+          _modelApiKey
+          title
+        }
+      }
     }
   }
 `
@@ -44,6 +64,16 @@ export const blogContentQuery = `
   query ($slug: String) {
     blog(filter: {slug: {eq: $slug}}) {
       title
+      content {
+        ... on SectionLeadRecord {
+          _modelApiKey
+          text
+        }
+        ... on SectionTitleRecord {
+          _modelApiKey
+          title
+        }
+      }
     }
   }
 `
