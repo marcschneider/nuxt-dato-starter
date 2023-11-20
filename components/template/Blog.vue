@@ -6,7 +6,7 @@ defineProps({
 
 <template>
   <h1>{{ pageData.title }}</h1>
-  <div>
-    {{ pageData.content }}
+  <div v-for="(section, index) in pageData.content" :key="index">
+    {{ section }}
   </div>
 </template>
