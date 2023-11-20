@@ -1,12 +1,27 @@
 <script setup>
 defineProps({
-  pageData: Object,
+  pageData: {
+    type: Object,
+    required: true,
+  },
 })
+
+const components = {
+  section_title: resolveComponent('SectionTitle'),
+  section_lead: resolveComponent('SectionLead'),
+}
+
+function dynamicComponent(section) {
+  return components[section._modelApiKey]
+}
 </script>
 
 <template>
   <h1>{{ pageData.title }}</h1>
-  <div v-for="(section, index) in pageData.content" :key="index">
-    {{ section }}
-  </div>
+  <component
+    :is="dynamicComponent(section)"
+    v-for="section in pageData.content"
+    :key="section.id"
+    :section-data="section"
+  />
 </template>
