@@ -31,10 +31,12 @@ export const commonContentQuery = `
       content {
         ... on SectionLeadRecord {
           _modelApiKey
+          id
           text
         }
         ... on SectionTitleRecord {
           _modelApiKey
+          id
           title
         }
       }
@@ -49,10 +51,12 @@ export const teamContentQuery = `
       content {
         ... on SectionLeadRecord {
           _modelApiKey
+          id
           text
         }
         ... on SectionTitleRecord {
           _modelApiKey
+          id
           title
         }
       }
