@@ -1,4 +1,3 @@
-/* eslint-disable new-cap */
 export default (options) => {
   const { query, variables = {} } = options
   const runtimeConfig = useRuntimeConfig()
@@ -15,7 +14,7 @@ export default (options) => {
     },
     transform: ({ data, errors }) => {
       if (errors)
-        throw new errors()
+        throw new Error('Error')
 
       return data
     },
