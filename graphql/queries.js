@@ -1,11 +1,3 @@
-export const contentQuery = `
-  query ($id: ItemId = "") {
-    page(filter: {id: {eq: $id}}) {
-      pageName
-      id
-    }
-  }
-`
 export const matchingSlugsQuery = `
   query ($slug: String) {
     allPages(filter: {slug: {eq: $slug}}) {
@@ -31,6 +23,15 @@ export const specialSlugsQuery = `
     setting {
       specialSlugBlog
       specialSlugTeam
+    }
+  }
+`
+
+export const commonContentQuery = `
+  query ($id: ItemId = "") {
+    page(filter: {id: {eq: $id}}) {
+      pageName
+      id
     }
   }
 `

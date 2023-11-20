@@ -1,23 +1,25 @@
 <script setup>
 const pageData = ref()
+const slugType = ref()
 const specialSlug = await isSpecialSlug()
 
 if (specialSlug) {
   const specialPageData = await loadSpecialPage(specialSlug)
   pageData.value = specialPageData
+  slugType.value = specialSlug.type
 }
 else {
   const commonSlugId = await isCommonSlug()
 
   if (commonSlugId) {
-    const foo = await loadCommonPage(commonSlugId)
-    pageData.value = foo.value.page.pageName
+    const commonPageData = await loadCommonPage(commonSlugId)
+    pageData.value = commonPageData
   }
 }
 </script>
 
 <template>
-  <div class="cursor-pointer hover:bg-green-300 transition text-md px-4 py-1 bg-green-200 text-green-800 rounded-md font-medium w-fit">
-    {{ pageData }}
-  </div>
+  <TemplateTeam v-if="slugType === 'specialSlugTeam'" :content="pageData.value.team" />
+  <TemplateBlog v-else-if="slugType === 'specialSlugBlog'" :content="pageData.value.blog" />
+  <TemplateCommon v-else :content="pageData.value.page" />
 </template>

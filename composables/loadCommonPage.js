@@ -1,8 +1,8 @@
-import { contentQuery } from '~/graphql/queries'
+import { commonContentQuery } from '~/graphql/queries'
 
 export default async function (pageId) {
   const { data } = await useGraphqlQuery({
-    query: contentQuery,
+    query: commonContentQuery,
     variables: {
       id: pageId,
     },
