@@ -1,30 +1,27 @@
 <script setup>
 defineProps({
-  pageData: Object,
+  pageData: {
+    type: Object,
+    required: true,
+  },
 })
 
-// function sectionName(item) {
-//   if (item._modelApiKey === undefined)
-//     return
+const components = {
+  section_title: resolveComponent('SectionTitle'),
+  section_lead: resolveComponent('SectionLead'),
+}
 
-//   const words = item._modelApiKey.split('_')
-
-//   const camelCase = words.map((word) => {
-//     return word.charAt(0).toUpperCase() + word.slice(1)
-//   }).join('')
-
-//   return resolveComponent(`Section${camelCase}`)
-// }
-
-const Foo = resolveComponent('SectionTitle')
+function dynamicComponent(section) {
+  return components[section._modelApiKey]
+}
 </script>
 
 <template>
   <h1>{{ pageData.title }}</h1>
   <component
-    :is="Foo"
-    v-for="(section, index) in pageData.content"
-    :key="index"
+    :is="dynamicComponent(section)"
+    v-for="section in pageData.content"
+    :key="section.id"
     :section-data="section"
   />
 </template>

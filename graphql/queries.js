@@ -67,10 +67,12 @@ export const blogContentQuery = `
       content {
         ... on SectionLeadRecord {
           _modelApiKey
+          id
           text
         }
         ... on SectionTitleRecord {
           _modelApiKey
+          id
           title
         }
       }

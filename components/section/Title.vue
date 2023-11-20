@@ -5,6 +5,5 @@ defineProps({
 </script>
 
 <template>
-  <div>Title</div>
   <div>{{ sectionData }}</div>
 </template>
