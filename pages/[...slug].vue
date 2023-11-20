@@ -1,9 +1,9 @@
 <script setup>
 const pageData = ref()
-const checkIsSpecialSlug = await isSpecialSlug()
+const specialSlug = await isSpecialSlug()
 
-if (checkIsSpecialSlug) {
-  const specialPageData = await loadSpecialPage()
+if (specialSlug) {
+  const specialPageData = await loadSpecialPage(specialSlug)
   pageData.value = specialPageData
 }
 else {

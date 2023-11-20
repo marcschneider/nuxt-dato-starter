@@ -27,10 +27,26 @@ export const matchingSlugsQuery = `
 `
 
 export const specialSlugsQuery = `
-      query {
-        setting {
-          specialSlugBlog
-          specialSlugTeam
-        }
-      }
-    `
+  query {
+    setting {
+      specialSlugBlog
+      specialSlugTeam
+    }
+  }
+`
+
+export const teamContentQuery = `
+  query ($slug: String = "") {
+    team(filter: {slug: {eq: $slug}}) {
+      title
+    }
+  }
+`
+
+export const blogContentQuery = `
+  query ($slug: String = "") {
+    blog(filter: {slug: {eq: $slug}}) {
+      title
+    }
+  }
+`

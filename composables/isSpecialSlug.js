@@ -3,14 +3,14 @@ import { specialSlugsQuery } from '~/graphql/queries'
 export default async function () {
   const route = useRoute()
   const routeParams = route.path.split('/').filter(Boolean)
-  const lastRouteItemChache = routeParams.pop()
+  const lastRouteItem = routeParams.pop()
   const routeString = routeParams.join('/')
 
   function checkSpecialSlugs(slugs) {
-    for (const slug in slugs) {
-      const specialSlug = slugs[slug].replace(/^\/|\/$/g, '')
+    for (const slugType in slugs) {
+      const specialSlug = slugs[slugType].replace(/^\/|\/$/g, '')
       if (routeString === specialSlug)
-        return [slug, lastRouteItemChache]
+        return slugType
     }
   }
 
@@ -18,11 +18,13 @@ export default async function () {
     query: specialSlugsQuery,
   })
 
-  const special = checkSpecialSlugs(data.value.setting)
+  const slugType = checkSpecialSlugs(data.value.setting)
 
-  if (special)
-    return 'special'
-
-  else
-    return false
+  if (slugType) {
+    return {
+      type: slugType,
+      value: lastRouteItem,
+    }
+  }
+  else { return null }
 }
