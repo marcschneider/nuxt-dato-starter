@@ -10,13 +10,29 @@ export default async function () {
     lastRouteItem = ''
 
   function checkParentHierarchy(page) {
-    return routeParams.slice(0, -1).every((param, index) => {
-      return page.parent && page.parent.slug === routeParams[index]
-    })
+    let currentPage = page
+
+    for (let index = routeParams.length - 2; index >= 0; index--) {
+      if (!currentPage.parent || currentPage.parent.slug !== routeParams[index])
+        return false
+
+      currentPage = currentPage.parent
+    }
+
+    return true
   }
 
   function findMatchId(pages) {
-    return pages.find(page => checkParentHierarchy(page) && page.parent === null)?.id
+    let bestMatchId = null
+
+    for (const page of pages) {
+      const isMatch = checkParentHierarchy(page)
+
+      if (isMatch && (!bestMatchId || page.parent === null))
+        bestMatchId = page.id
+    }
+
+    return bestMatchId
   }
 
   const { data } = await useGraphqlQuery({
