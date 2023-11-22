@@ -2,13 +2,13 @@ export const matchingSlugsQuery = `
   query ($slug: String) {
     allPages(filter: {slug: {eq: $slug}}) {
       id
-      slug      
+      slug
       parent {
         id
         slug
         parent {
           id
-          slug          
+          slug
         }
       }
     }
