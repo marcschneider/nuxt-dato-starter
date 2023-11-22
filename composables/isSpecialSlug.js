@@ -18,6 +18,12 @@ export default async function () {
     query: specialSlugsQuery,
   })
 
+  if (!data?.value?.setting) {
+    throw createError({
+      statusCode: 404,
+    })
+  }
+
   const slugType = checkSpecialSlugs(data.value.setting)
 
   if (slugType) {

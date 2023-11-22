@@ -12,10 +12,7 @@ export default (options) => {
       query,
       variables,
     },
-    transform: ({ data, errors }) => {
-      if (errors)
-        throw new Error('Error')
-
+    transform: ({ data }) => {
       return data
     },
   })

@@ -22,7 +22,6 @@ export default async function (slug) {
   else {
     throw createError({
       statusCode: 404,
-      statusMessage: 'Page Not Found',
     })
   }
 }

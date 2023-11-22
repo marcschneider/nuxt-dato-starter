@@ -8,5 +8,12 @@ export default async function (pageId) {
     },
   })
 
-  return data
+  if (data) {
+    return data
+  }
+  else {
+    throw createError({
+      statusCode: 404,
+    })
+  }
 }

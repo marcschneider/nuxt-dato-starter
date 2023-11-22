@@ -50,7 +50,6 @@ export default async function () {
   else {
     throw createError({
       statusCode: 404,
-      statusMessage: 'Page Not Found',
     })
   }
 }
