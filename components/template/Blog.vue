@@ -22,6 +22,7 @@ function dynamicComponent(section) {
     :is="dynamicComponent(section)"
     v-for="section in pageData.content"
     :key="section.id"
+    class="text-sm tracking-wide font-mono w-6/12 bg-green-100 p-6 rounded-xl mt-2"
     :section-data="section"
   />
 </template>
