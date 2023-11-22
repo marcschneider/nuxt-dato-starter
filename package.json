@@ -11,6 +11,11 @@
     "lint": "eslint .",
     "lint:fix": "eslint . --fix"
   },
+  "dependencies": {
+    "crypto-js": "^4.2.0",
+    "vue": "^3.3.8",
+    "vue-datocms": "^4.0.6"
+  },
   "devDependencies": {
     "@antfu/eslint-config": "^1.1.0",
     "@nuxt/devtools": "latest",
@@ -19,8 +24,5 @@
     "@types/node": "^18.17.3",
     "eslint": "^8.53.0",
     "nuxt": "^3.8.1"
-  },
-  "dependencies": {
-    "crypto-js": "^4.2.0"
   }
 }

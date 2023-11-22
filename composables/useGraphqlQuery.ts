@@ -1,4 +1,4 @@
-// import { useQuerySubscription } from 'vue-datocms'
+import { useQuerySubscription } from 'vue-datocms'
 
 import type { Preview } from '~/utils/preview'
 import { PREVIEW_MODE_COOKIE_NAME } from '~/utils/preview'
@@ -31,15 +31,15 @@ export default async function useGraphqlQuery({
     environment,
   })
 
-  // if (isClient && preview) {
-  //   return subscribeToDrafts({
-  //     query,
-  //     variables,
-  //     initialData: initialData.value,
-  //     token,
-  //     environment,
-  //   })
-  // }
+  if (isClient && preview) {
+    return subscribeToDrafts({
+      query,
+      variables,
+      initialData: initialData.value,
+      token,
+      environment,
+    })
+  }
 
   return { data: initialData }
 }
@@ -93,28 +93,28 @@ async function fetchPublished({
   return { data }
 }
 
-// async function subscribeToDrafts({
-//   query,
-//   variables = {},
-//   token,
-//   initialData,
-//   environment,
-// }: {
-//   query: any
-//   variables?: Record<string, any>
-//   token: string
-//   initialData: any
-//   environment?: string
-// }) {
-//   return useQuerySubscription({
-//     query,
-//     variables,
-//     token,
-//     initialData,
-//     includeDrafts: true,
-//     environment,
-//   })
-// }
+async function subscribeToDrafts({
+  query,
+  variables = {},
+  token,
+  initialData,
+  environment,
+}: {
+  query: any
+  variables?: Record<string, any>
+  token: string
+  initialData: any
+  environment?: string
+}) {
+  return useQuerySubscription({
+    query,
+    variables,
+    token,
+    initialData,
+    includeDrafts: true,
+    environment,
+  })
+}
 
 async function previewAndToken(
   runtimeConfig: ReturnType<typeof useRuntimeConfig>,

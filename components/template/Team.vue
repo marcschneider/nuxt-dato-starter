@@ -17,7 +17,9 @@ function dynamicComponent(section) {
 </script>
 
 <template>
-  <h1>{{ pageData.title }}</h1>
+  <h1 class="text-4xl mb-8">
+    {{ pageData.title }}
+  </h1>
   <component
     :is="dynamicComponent(section)"
     v-for="section in pageData.content"
