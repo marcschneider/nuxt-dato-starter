@@ -1,6 +1,6 @@
 <script setup>
-const pageData = ref()
-const slugType = ref()
+const pageData = ref(null)
+const slugType = ref(null)
 const specialSlug = await isSpecialSlug()
 
 if (specialSlug) {
@@ -10,11 +10,8 @@ if (specialSlug) {
 }
 else {
   const commonSlugId = await isCommonSlug()
-
-  if (commonSlugId) {
-    const commonPageData = await loadCommonPage(commonSlugId)
-    pageData.value = commonPageData
-  }
+  const commonPageData = await loadCommonPage(commonSlugId)
+  pageData.value = commonPageData
 }
 </script>
 

@@ -42,5 +42,15 @@ export default async function () {
     },
   })
 
-  return findMatchId(data.value.allPages)
+  const match = findMatchId(data.value.allPages)
+
+  if (match) {
+    return match
+  }
+  else {
+    throw createError({
+      statusCode: 404,
+      statusMessage: 'Page Not Found',
+    })
+  }
 }

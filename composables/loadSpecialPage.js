@@ -15,5 +15,14 @@ export default async function (slug) {
     variables: { slug: slug.value },
   })
 
-  return data
+  const [prop] = Object.keys(data.value)
+  if (data.value[prop]) {
+    return data
+  }
+  else {
+    throw createError({
+      statusCode: 404,
+      statusMessage: 'Page Not Found',
+    })
+  }
 }
