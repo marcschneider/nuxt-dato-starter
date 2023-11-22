@@ -51,6 +51,11 @@ export const commonContentQuery = `
         ... SectionLeadRecordFields
         ... SectionTitleRecordFields
       }
+      _seoMetaTags {
+        attributes
+        content
+        tag
+      }
     }
   }
 `
@@ -66,6 +71,11 @@ export const teamContentQuery = `
         ... SectionLeadRecordFields
         ... SectionTitleRecordFields
       }
+      _seoMetaTags {
+        attributes
+        content
+        tag
+      }
     }
   }
 `
@@ -80,6 +90,11 @@ export const blogContentQuery = `
       content {
         ... SectionLeadRecordFields
         ... SectionTitleRecordFields
+      }
+      _seoMetaTags {
+        attributes
+        content
+        tag
       }
     }
   }
