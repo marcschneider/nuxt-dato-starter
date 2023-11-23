@@ -14,8 +14,7 @@ defineComponent({
 const customNodeRules = [
   renderNodeRule(
     node => node.type === 'paragraph',
-    (node, children) => {
-      console.log(node)
+    (node) => {
       return `<p class="text-xl">${node.children}</p>`
     },
   ),
