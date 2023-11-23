@@ -1,9 +1,5 @@
-function generatePreviewUrl({ item, itemType, locale }) {
-  console.log(item || 'no item')
-  console.log(itemType || 'no itemType')
-  console.log(locale || 'no locale')
-
-  return null
+function generatePreviewUrl(body) {
+  return body
 }
 
 export default eventHandler(async (event) => {
@@ -18,7 +14,6 @@ export default eventHandler(async (event) => {
 
   const url = generatePreviewUrl(await readBody(event))
   const baseUrl = process.env.URL ? process.env.URL : 'http://localhost:3000'
-  console.log('baseUrl', baseUrl)
 
   return {
     previewLinks: [
@@ -29,6 +24,10 @@ export default eventHandler(async (event) => {
       {
         label: 'Live',
         url: 'https://develop--unknown-dato.netlify.app/api/disable-preview?redirect=/blog/marc',
+      },
+      {
+        label: 'Data',
+        url: `url=${url}/baseUrl=${baseUrl}`,
       },
     ],
   }
