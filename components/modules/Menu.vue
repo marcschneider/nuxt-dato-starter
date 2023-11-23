@@ -29,9 +29,11 @@ function generateUrl(item) {
 </script>
 
 <template>
-  <div v-for="item in menu" :key="item.id">
-    <NuxtLink :to="generateUrl(item.pointsTo)">
-      {{ item.title }}
-    </NuxtLink>
+  <div class="flex space-x-4">
+    <div v-for="item in menu" :key="item.id">
+      <NuxtLink :to="generateUrl(item.pointsTo)">
+        {{ item.title }}
+      </NuxtLink>
+    </div>
   </div>
 </template>
