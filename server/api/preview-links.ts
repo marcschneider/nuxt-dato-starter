@@ -1,7 +1,9 @@
 function generatePreviewUrl({ item, itemType, locale }) {
+  let url = null
   switch (itemType.attributes.api_key) {
     case 'page':
-      return `page/${item.id}`
+      url = generateUrl()
+      return `page/${item.id}/${url}`
     case 'blog':
       return `blog/${item.id}`
     case 'team':
