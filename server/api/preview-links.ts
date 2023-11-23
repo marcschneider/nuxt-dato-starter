@@ -5,7 +5,7 @@ export default eventHandler(async (event) => {
     'Access-Control-Allow-Methods': 'POST',
     'Access-Control-Allow-Headers': 'Content-Type, Authorization',
   })
-  if (event.req.method === 'OPTIONS')
+  if (event.node.req.method === 'OPTIONS')
     return send(event, 'ok')
 
   return {
