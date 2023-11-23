@@ -52,5 +52,17 @@ export default eventHandler(async (event) => {
       url: `${baseUrl}${url}`,
     },
   ]
-  return { previewLinks }
+
+  return {
+    previewLinks: [
+      {
+        label: 'Published (en)',
+        url: 'https://closetoknown.digital',
+      },
+      {
+        label: 'Draft (en)',
+        url: 'https://closetoknown.digital',
+      },
+    ],
+  }
 })
