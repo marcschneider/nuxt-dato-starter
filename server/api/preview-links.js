@@ -94,7 +94,7 @@ export default eventHandler(async (event) => {
       },
       {
         label: 'Data',
-        url,
+        url: `https://develop--unknown-dato.netlify.app/api/disable-preview?redirect=${url}`,
       },
     ],
   }
