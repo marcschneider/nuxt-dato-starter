@@ -1,8 +1,13 @@
 function generatePreviewUrl({ item, itemType, locale }) {
-  return {
-    item,
-    itemType,
-    locale,
+  switch (itemType.attributes.api_key) {
+    case 'page':
+      return `page/${item.id}`
+    case 'blog':
+      return `blog/${item.id}`
+    case 'team':
+      return `team/${item.id}`
+    default:
+      return null
   }
 }
 
@@ -17,7 +22,6 @@ export default eventHandler(async (event) => {
     return send(event, 'ok')
 
   const url = generatePreviewUrl(await readBody(event))
-  const baseUrl = process.env.URL ? process.env.URL : 'http://localhost:3000'
 
   return {
     previewLinks: [
@@ -31,7 +35,7 @@ export default eventHandler(async (event) => {
       },
       {
         label: 'Data',
-        url: JSON.stringify(url),
+        url,
       },
     ],
   }
