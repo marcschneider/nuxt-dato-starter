@@ -31,7 +31,7 @@ export default eventHandler(async (event) => {
   )
 
   setCookie(event, PREVIEW_MODE_COOKIE_NAME, hash, {
-    samesite: 'None',
+    samesite: 'none',
     secure: true,
   })
 
