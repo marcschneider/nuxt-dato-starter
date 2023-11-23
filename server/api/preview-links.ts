@@ -1,5 +1,9 @@
-function generatePreviewUrl(body) {
-  return body
+function generatePreviewUrl({ item, itemType, locale }) {
+  return {
+    item,
+    itemType,
+    locale,
+  }
 }
 
 export default eventHandler(async (event) => {
