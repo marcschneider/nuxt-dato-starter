@@ -12,11 +12,11 @@ export default eventHandler(async (event) => {
     previewLinks: [
       {
         label: 'Published (en)',
-        url: 'http://develop--unknown-dato.netlify.app/blog/marc',
+        url: 'https://develop--unknown-dato.netlify.app/blog/marc',
       },
       {
         label: 'Draft (en)',
-        url: 'http://develop--unknown-dato.netlify.app/api/enable-preview?secret=42&redirect=/blog/marc',
+        url: 'https://develop--unknown-dato.netlify.app/api/enable-preview?secret=42&redirect=/blog/marc',
       },
     ],
   }
