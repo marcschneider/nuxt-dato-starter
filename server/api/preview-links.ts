@@ -1,3 +1,5 @@
+import generateUrl from '~/composables/generateUrl'
+
 function generatePreviewUrl({ item, itemType, locale }) {
   let url = null
   switch (itemType.attributes.api_key) {
