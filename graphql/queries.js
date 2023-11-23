@@ -1,3 +1,16 @@
+export const menuHeaderQuery = `
+  query MenuHeaderQuery {
+    layout {
+      menuHeader {
+        title
+        pointsTo {
+          id
+        }
+      }
+    }
+  }
+`
+
 export const matchingSlugsQuery = `
   query ($slug: String) {
     allPages(filter: {slug: {eq: $slug}}) {
