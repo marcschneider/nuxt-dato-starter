@@ -1,3 +1,11 @@
+function generatePreviewUrl({ item, itemType, locale }) {
+  console.log(item || 'no item')
+  console.log(itemType || 'no itemType')
+  console.log(locale || 'no locale')
+
+  return null
+}
+
 export default eventHandler(async (event) => {
   setResponseHeaders(event, {
     'Content-Type': 'application/json',
@@ -7,6 +15,10 @@ export default eventHandler(async (event) => {
   })
   if (event.node.req.method === 'OPTIONS')
     return send(event, 'ok')
+
+  const url = generatePreviewUrl(await readBody(event))
+  const baseUrl = process.env.URL ? process.env.URL : 'http://localhost:3000'
+  console.log('baseUrl', baseUrl)
 
   return {
     previewLinks: [
