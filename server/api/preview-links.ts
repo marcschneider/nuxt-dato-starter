@@ -6,7 +6,7 @@ const pageQuery = `
   }
 `
 
-async function loadData(pageId) {
+async function loadData(pageId: string) {
   const data = await $fetch('https://graphql.datocms.com/', {
     method: 'POST',
     headers: {
