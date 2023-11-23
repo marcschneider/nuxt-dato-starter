@@ -30,7 +30,10 @@ export default eventHandler(async (event) => {
     runtimeConfig.previewModeEncryptionSecret,
   )
 
-  setCookie(event, PREVIEW_MODE_COOKIE_NAME, hash)
+  setCookie(event, PREVIEW_MODE_COOKIE_NAME, hash, {
+    samesite: 'None',
+    secure: true,
+  })
 
   // Redirect to the homepage, or to the URL provided with the `redirect` query
   // /api/enable-preview?secret=42&redirect=/blog/marc
