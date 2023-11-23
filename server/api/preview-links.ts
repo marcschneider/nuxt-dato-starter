@@ -31,7 +31,7 @@ export default eventHandler(async (event) => {
       },
       {
         label: 'Data',
-        url: `url=${url}/baseUrl=${baseUrl}`,
+        url: JSON.stringify(url),
       },
     ],
   }
