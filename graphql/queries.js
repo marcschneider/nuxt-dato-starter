@@ -2,9 +2,16 @@ export const menuHeaderQuery = `
   query MenuHeaderQuery {
     layout {
       menuHeader {
+        id
         title
         pointsTo {
-          id
+          slug
+          parent {
+            slug
+            parent {
+              slug
+            }
+          }
         }
       }
     }
