@@ -60,16 +60,30 @@ export const sectionLead = `
   }
 `
 
+export const sectionText = `
+  fragment SectionTextRecordFields on SectionTextRecord {
+    _modelApiKey
+    id
+    text {
+      blocks
+      links
+      value
+    }
+  }
+`
+
 export const commonContentQuery = `
   ${sectionTitle}  
   ${sectionLead}
+  ${sectionText}
 
   query ($id: ItemId) {
     page(filter: {id: {eq: $id}}) {
       title
       content {
-        ... SectionLeadRecordFields
         ... SectionTitleRecordFields
+        ... SectionLeadRecordFields
+        ... SectionTextRecordFields
       }
       _seoMetaTags {
         attributes
@@ -88,8 +102,8 @@ export const teamContentQuery = `
     team(filter: {slug: {eq: $slug}}) {
       title
       content {
-        ... SectionLeadRecordFields
         ... SectionTitleRecordFields
+        ... SectionLeadRecordFields
       }
       _seoMetaTags {
         attributes
@@ -108,8 +122,8 @@ export const blogContentQuery = `
     blog(filter: {slug: {eq: $slug}}) {
       title
       content {
-        ... SectionLeadRecordFields
         ... SectionTitleRecordFields
+        ... SectionLeadRecordFields
       }
       _seoMetaTags {
         attributes
