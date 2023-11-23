@@ -2,11 +2,17 @@ const pageQuery = `
   query Page($pageId: ItemId) {
     page(filter: {id: {eq: $pageId}}) {
       slug
+      parent {
+        slug
+        parent {
+          slug
+        }
+      }
     }
   }
 `
 
-async function loadData(pageId: string) {
+async function loadData(pageId) {
   const data = await $fetch('https://graphql.datocms.com/', {
     method: 'POST',
     headers: {
@@ -22,10 +28,29 @@ async function loadData(pageId: string) {
   return data || null
 }
 
-async function generatePreviewUrl() {
+function generateUrl(item) {
+  function buildSlug(obj) {
+    if (!obj)
+      return ''
+
+    const { slug, parent } = obj
+    const parentSlug = buildSlug(parent)
+
+    if (parentSlug)
+      return `${parentSlug}/${slug}`
+
+    return slug
+  }
+
+  const slug = buildSlug(item.page)
+  return `/${slug}`
+}
+
+async function generatePreviewUrl(body) {
+  const { item } = body
   // const { item, itemType, locale } = body
-  let url = null
-  url = await loadData('94688351')
+  const data = await loadData(item.id) // 94688351 //94512920 //93760636
+  const url = generateUrl(data.data)
   if (url)
     return url
   else
