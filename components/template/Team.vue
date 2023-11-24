@@ -8,7 +8,6 @@ defineProps({
 
 const components = {
   section_title: resolveComponent('SectionTitle'),
-  section_lead: resolveComponent('SectionLead'),
 }
 
 function dynamicComponent(section) {
