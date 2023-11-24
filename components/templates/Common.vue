@@ -17,11 +17,6 @@ function dynamicComponent(section) {
 </script>
 
 <template>
-  <ModulesGrid class="mt-10">
-    <h1 class="mb-8 text-4xl col-span-full">
-      {{ pageData.title }}
-    </h1>
-  </ModulesGrid>
   <component
     :is="dynamicComponent(section)"
     v-for="section in pageData.content"

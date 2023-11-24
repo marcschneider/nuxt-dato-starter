@@ -70,7 +70,6 @@ export const commonContentQuery = `
 
   query ($id: ItemId) {
     page(filter: {id: {eq: $id}}) {
-      title
       content {
         ... SectionTitleRecordFields
         ... SectionTextRecordFields
@@ -89,7 +88,7 @@ export const teamContentQuery = `
   
   query ($slug: String) {
     team(filter: {slug: {eq: $slug}}) {
-      title
+      name
       content {
         ... SectionTitleRecordFields
       }
@@ -105,7 +104,7 @@ export const teamContentQuery = `
 export const blogContentQuery = `
   ${sectionTitle}  
   
-  query ($slug: String) {
+  query ($slug: String) {    
     blog(filter: {slug: {eq: $slug}}) {
       title
       content {
