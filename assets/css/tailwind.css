@@ -2,7 +2,7 @@
 @tailwind components;
 @tailwind utilities;
 
-/* @layer base {
+@layer base {
   @font-face {
     font-family: "Haptik";
     src: url("fonts/GTHaptikRegular.woff2") format("woff");
@@ -31,4 +31,4 @@
   .page-leave-to {
     @apply opacity-0 blur-[1rem];
   }
-} */
+}
