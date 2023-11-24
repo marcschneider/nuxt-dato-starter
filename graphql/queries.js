@@ -52,8 +52,8 @@ export const sectionTitle = `
   }
 `
 
-export const sectionText = `
-  fragment SectionTextRecordFields on SectionTextRecord {
+export const sectionRichText = `
+  fragment SectionRichTextRecordFields on SectionRichTextRecord {
     _modelApiKey
     id
     text {
@@ -66,13 +66,13 @@ export const sectionText = `
 
 export const commonContentQuery = `
   ${sectionTitle}  
-  ${sectionText}
+  ${sectionRichText}
 
   query ($id: ItemId) {
     page(filter: {id: {eq: $id}}) {
       content {
         ... SectionTitleRecordFields
-        ... SectionTextRecordFields
+        ... SectionRichTextRecordFields
       }
       _seoMetaTags {
         attributes

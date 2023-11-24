@@ -6,11 +6,9 @@ defineProps({
 
 <template>
   <ModulesGrid class="mt-10">
-    <ElementsTypography
+    <ModulesStructuredText
       class="col-span-full"
-      :text="sectionData.title"
-      tag="h2"
-      style-type="xl"
+      :content="sectionData.text"
     />
   </ModulesGrid>
 </template>

@@ -8,7 +8,7 @@ defineProps({
 
 const components = {
   section_title: resolveComponent('SectionsTitle'),
-  section_text: resolveComponent('SectionsText'),
+  section_rich_text: resolveComponent('SectionsRichText'),
 }
 
 function dynamicComponent(section) {
