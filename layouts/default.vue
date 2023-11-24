@@ -1,8 +1,8 @@
 <template>
   <div class="container mx-auto mt-20">
     <ModulesAlert />
-    <SectionHeader />
+    <SectionsHeader />
     <slot />
-    <SectionFooter />
+    <SectionsFooter />
   </div>
 </template>

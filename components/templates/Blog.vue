@@ -7,7 +7,7 @@ defineProps({
 })
 
 const components = {
-  section_title: resolveComponent('SectionTitle'),
+  section_title: resolveComponent('SectionsTitle'),
 }
 
 function dynamicComponent(section) {

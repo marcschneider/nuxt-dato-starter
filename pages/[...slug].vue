@@ -28,8 +28,8 @@ useHead(() => {
 
 <template>
   <div>
-    <TemplateTeam v-if="slugType === 'specialSlugTeam'" :page-data="pageData.team" />
-    <TemplateBlog v-else-if="slugType === 'specialSlugBlog'" :page-data="pageData.blog" />
-    <TemplateCommon v-else :page-data="pageData.page" />
+    <TemplatesTeam v-if="slugType === 'specialSlugTeam'" :page-data="pageData.team" />
+    <TemplatesBlog v-else-if="slugType === 'specialSlugBlog'" :page-data="pageData.blog" />
+    <TemplatesCommon v-else :page-data="pageData.page" />
   </div>
 </template>
