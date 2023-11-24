@@ -5,19 +5,16 @@
 </template>
 
 <style>
-@media (min-width: 1920px) {
-  html {
-    font-size: 0.8333333333vw;
-  }
+html {
+  @apply antialiased sc:text-[0.8333333333vw];
 }
 
 .page-enter-active,
 .page-leave-active {
-  transition: all 0.4s;
+  @apply transition duration-500;
 }
 .page-enter-from,
 .page-leave-to {
-  opacity: 0;
-  filter: blur(1rem);
+  @apply opacity-0 blur-[1rem];
 }
 </style>
