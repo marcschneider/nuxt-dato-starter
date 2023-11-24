@@ -6,7 +6,7 @@ defineProps({
 
 <template>
   <ModulesGrid class="mt-10">
-    <div class="col-span-full text-sm tracking-wide font-mono">
+    <div class="font-mono text-sm tracking-wide col-span-full">
       {{ sectionData }}
     </div>
   </ModulesGrid>

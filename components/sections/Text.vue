@@ -24,7 +24,7 @@ const customNodeRules = [
 <template>
   <ModulesGrid class="mt-10">
     <StructuredText
-      class="col-span-full text-sm tracking-wide font-mono"
+      class="font-mono text-sm tracking-wide col-span-full"
       :data="sectionData.text"
       :custom-node-rules="customNodeRules"
     />

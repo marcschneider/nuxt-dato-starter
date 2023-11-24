@@ -17,7 +17,7 @@ function dynamicComponent(section) {
 
 <template>
   <ModulesGrid class="mt-10">
-    <h1 class="text-4xl mb-8 col-span-full">
+    <h1 class="mb-8 text-4xl col-span-full">
       {{ pageData.title }}
     </h1>
   </ModulesGrid>
