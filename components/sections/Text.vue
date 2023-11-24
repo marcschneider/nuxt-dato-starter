@@ -22,7 +22,11 @@ const customNodeRules = [
 </script>
 
 <template>
-  <div>
-    <StructuredText :data="sectionData.text" :custom-node-rules="customNodeRules" />
-  </div>
+  <ModulesGrid class="mt-10">
+    <StructuredText
+      class="col-span-full text-sm tracking-wide font-mono"
+      :data="sectionData.text"
+      :custom-node-rules="customNodeRules"
+    />
+  </ModulesGrid>
 </template>

@@ -19,7 +19,7 @@ function disablePreview() {
 
 <template>
   <div
-    class="bg-slate-800 w-3/12 p-5 rounded-md font-mono text-sm text-white fixed bottom-5 right-5"
+    class="bg-slate-800 w-2/12 p-5 rounded-md font-mono text-sm text-white fixed bottom-5 right-5"
     :class="{ '!bg-green-800': isPreview }"
   >
     <div v-if="isPreview">

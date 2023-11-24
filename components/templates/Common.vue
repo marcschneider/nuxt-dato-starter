@@ -17,18 +17,15 @@ function dynamicComponent(section) {
 </script>
 
 <template>
-  <div>
-    <h1 class="text-4xl mb-8">
+  <ModulesGrid class="mt-10">
+    <h1 class="text-4xl mb-8 col-span-full">
       {{ pageData.title }}
     </h1>
-    <div>
-      <component
-        :is="dynamicComponent(section)"
-        v-for="section in pageData.content"
-        :key="section.id"
-        class="text-sm tracking-wide font-mono w-6/12 bg-green-100 p-6 rounded-xl mt-2"
-        :section-data="section"
-      />
-    </div>
-  </div>
+  </ModulesGrid>
+  <component
+    :is="dynamicComponent(section)"
+    v-for="section in pageData.content"
+    :key="section.id"
+    :section-data="section"
+  />
 </template>

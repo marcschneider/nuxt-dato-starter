@@ -1,8 +1,9 @@
 <template>
-  <div class="container mx-auto mt-20">
-    <ModulesAlert />
+  <div class="flex flex-col min-h-screen">
     <SectionsHeader />
-    <slot />
+    <div class="flex-grow">
+      <slot />
+    </div>
     <SectionsFooter />
   </div>
 </template>
