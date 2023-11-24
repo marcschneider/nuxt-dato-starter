@@ -3,3 +3,34 @@
     <NuxtPage />
   </NuxtLayout>
 </template>
+
+<style>
+  @font-face {
+    font-family: "Haptik";
+    src: url("fonts/GTHaptikRegular.woff2") format("woff");
+    font-weight: 400;
+    font-style: normal;
+    font-display: swap;
+  }
+
+  @font-face {
+    font-family: "Haptik";
+    src: url("fonts/GTHaptikBold.woff2") format("woff");
+    font-weight: 700;
+    font-style: normal;
+    font-display: swap;
+  }
+
+  html {
+    @apply antialiased sc:text-[0.8333333333vw];
+  }
+
+  .page-enter-active,
+  .page-leave-active {
+    @apply transition duration-500;
+  }
+  .page-enter-from,
+  .page-leave-to {
+    @apply opacity-0 blur-[1rem];
+  }
+</style>
