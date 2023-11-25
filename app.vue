@@ -10,6 +10,7 @@ onMounted(() => {
 
 <template>
   <NuxtLayout>
+    <NuxtLoadingIndicator color="black" />
     <NuxtPage />
   </NuxtLayout>
 </template>
