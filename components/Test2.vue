@@ -21,19 +21,19 @@ onMounted(() => {
 <template>
   <div class="outer">
     <div class="inner">
-      <section class="bg-red-500 panel">
+      <section class="bg-red-500 panel will-change-transform">
         ONE
       </section>
-      <section class="bg-orange-500 panel">
+      <section class="bg-orange-500 panel will-change-transform">
         TWO
       </section>
-      <section class="bg-purple-500 panel">
+      <section class="bg-purple-500 panel will-change-transform">
         THREE
       </section>
-      <section class="bg-green-500 panel">
+      <section class="bg-green-500 panel will-change-transform">
         FOUR
       </section>
-      <section class="bg-gray-500 panel">
+      <section class="bg-gray-500 panel will-change-transform">
         FIVE
       </section>
     </div>

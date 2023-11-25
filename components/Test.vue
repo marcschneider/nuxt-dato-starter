@@ -29,8 +29,8 @@ onMounted(() => {
 </script>
 
 <template>
-  <div ref="outer" class="w-full h-[200vh] bg-slate-100 mt-20">
-    <div ref="inner" class="text-center opacity-100 text-8xl">
+  <div ref="outer" class="will-change-transform w-full h-[200vh] bg-slate-100 mt-20">
+    <div ref="inner" class="text-center opacity-100 will-change-transform text-8xl">
       GSAP
     </div>
   </div>
