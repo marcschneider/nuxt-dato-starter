@@ -7,7 +7,7 @@ module.exports = {
   theme: {
     extend: {
       fontFamily: {
-        sans: ['Haptik', ...defaultTheme.fontFamily.sans],
+        sans: ['GT Haptik', ...defaultTheme.fontFamily.sans],
       },
       screens: {
         ph: { max: '767px' },
