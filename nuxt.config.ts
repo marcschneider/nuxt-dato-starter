@@ -14,6 +14,9 @@ export default defineNuxtConfig({
       },
     },
   },
+  plugins: [
+    '~/plugins/gsap',
+  ],
   modules: [
     '@nuxtjs/tailwindcss',
     '@nuxtjs/html-validator',
