@@ -19,6 +19,7 @@ const element = ref()
 
 onMounted(() => {
   const split = new SplitText(element.value, { type: 'chars' })
+  gsap.set(element.value, { opacity: 1 })
   gsap.from(split.chars, {
     duration: 0.5,
     y: 20,
@@ -39,7 +40,7 @@ const buildStyle = computed(() => {
 </script>
 
 <template>
-  <component :is="props.tag" ref="element" class="text-red-500" :class="buildStyle">
+  <component :is="props.tag" ref="element" class="text-red-500 opacity-0" :class="buildStyle">
     {{ props.text }}
   </component>
 </template>
