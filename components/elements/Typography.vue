@@ -14,20 +14,6 @@ const props = defineProps({
   },
 })
 
-const { $gsap: gsap, $SplitText: SplitText } = useNuxtApp()
-const element = ref()
-
-onMounted(() => {
-  const split = new SplitText(element.value, { type: 'chars' })
-  gsap.set(element.value, { opacity: 1 })
-  gsap.from(split.chars, {
-    duration: 0.5,
-    y: 20,
-    autoAlpha: 0,
-    stagger: 0.05,
-  })
-})
-
 const buildStyle = computed(() => {
   if (props.styleType === 'xl')
     return 'text-6xl font-bold text-gray-900'
@@ -40,7 +26,7 @@ const buildStyle = computed(() => {
 </script>
 
 <template>
-  <component :is="props.tag" ref="element" class="text-red-500 opacity-0" :class="buildStyle">
+  <component :is="props.tag" :class="buildStyle">
     {{ props.text }}
   </component>
 </template>

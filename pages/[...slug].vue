@@ -31,7 +31,5 @@ useHead(() => {
     <TemplatesTeam v-if="slugType === 'specialSlugTeam'" :page-data="pageData.team" />
     <TemplatesBlog v-else-if="slugType === 'specialSlugBlog'" :page-data="pageData.blog" />
     <TemplatesCommon v-else :page-data="pageData.page" />
-    <Test />
-    <Test2 />
   </div>
 </template>

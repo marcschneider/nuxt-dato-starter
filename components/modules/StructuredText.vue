@@ -14,16 +14,16 @@ defineComponent({
 })
 
 const customNodeRules = [
-  renderNodeRule(isHeading, ({ adapter: { renderNode: h }, node, children, key }) => {
-    let styleType = 'base'
-    if (node.level === 1)
-      styleType = 'xl'
-    else if (node.level === 2)
-      styleType = 'lg'
-    else
-      styleType = 'base'
-    return h(ElementsTypography, { key, tag: `h${node.level}`, styleType, text: children[0] }, [])
-  }),
+  // renderNodeRule(isHeading, ({ adapter: { renderNode: h }, node, children, key }) => {
+  //   let styleType = 'base'
+  //   if (node.level === 1)
+  //     styleType = 'xl'
+  //   else if (node.level === 2)
+  //     styleType = 'lg'
+  //   else
+  //     styleType = 'base'
+  //   return h(ElementsTypography, { key, tag: `h${node.level}`, styleType, text: children[0] }, [])
+  // }),
 ]
 </script>
 
