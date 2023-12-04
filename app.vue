@@ -1,16 +1,22 @@
 <script setup>
 const { $ScrollSmoother: ScrollSmoother } = useNuxtApp()
+
+const pageWrapper = ref()
+
 onMounted(() => {
   ScrollSmoother.create({
-    smooth: 0.5,
+    content: pageWrapper.value,
+    smooth: 0.25,
     effects: true,
   })
 })
 </script>
 
 <template>
-  <NuxtLayout>
-    <NuxtLoadingIndicator color="black" />
-    <NuxtPage />
-  </NuxtLayout>
+  <div ref="pageWrapper">
+    <NuxtLayout>
+      <NuxtLoadingIndicator color="black" />
+      <NuxtPage />
+    </NuxtLayout>
+  </div>
 </template>
