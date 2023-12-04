@@ -5,10 +5,10 @@ defineProps({
 </script>
 
 <template>
-  <ModulesGrid class="mt-10">
+  <ModulesContainer class="mt-10">
     <ModulesStructuredText
       class="col-span-full"
       :content="sectionData.text"
     />
-  </ModulesGrid>
+  </ModulesContainer>
 </template>

@@ -5,12 +5,12 @@ defineProps({
 </script>
 
 <template>
-  <ModulesGrid class="mt-10">
+  <ModulesContainer class="mt-10">
     <ElementsTypography
       class="col-span-full"
       :text="sectionData.title"
       tag="h2"
       style-type="xl"
     />
-  </ModulesGrid>
+  </ModulesContainer>
 </template>
