@@ -1,5 +1,6 @@
 <script setup>
-import { Image as DatocmsImage, StructuredText, renderMarkRule, renderNodeRule } from 'vue-datocms'
+import { Image as DatocmsImage, StructuredText } from 'vue-datocms'
+import { NuxtLink } from '#components'
 
 const props = defineProps({
   sectionData: Object,
@@ -9,11 +10,7 @@ const props = defineProps({
 function renderLinkToRecord({ record, children, transformedMeta }) {
   switch (record.__typename) {
     case 'PageRecord':
-      return h(
-        'a',
-        { ...transformedMeta, href: `/team/${record.slug}` },
-        children,
-      )
+      return h(NuxtLink, { ...transformedMeta, to: generateCommonUrl(record) }, () => [h('span', {}, [children])])
     default:
       return null
   }
@@ -22,7 +19,7 @@ function renderLinkToRecord({ record, children, transformedMeta }) {
 function renderInlineRecord({ record }) {
   switch (record.__typename) {
     case 'PageRecord':
-      return h('a', { href: `/team/${record.slug}` }, record.label)
+      return h(NuxtLink, { ...transformedMeta, to: generateCommonUrl(record) }, () => [h('span', {}, [record.label])])
     default:
       return null
   }

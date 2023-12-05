@@ -92,6 +92,12 @@ export const sectionRichText = `
           id
           slug
           label
+          parent {
+            slug
+            parent {
+              slug
+            }
+          }
         }
         ... on BlogRecord {
           id

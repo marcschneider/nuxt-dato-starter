@@ -28,29 +28,30 @@ async function loadData(pageId) {
   return data || null
 }
 
-function generateUrl(item) {
-  function buildSlug(obj) {
-    if (!obj)
-      return ''
+// function generateUrl(item) {
+//   function buildSlug(obj) {
+//     if (!obj)
+//       return ''
 
-    const { slug, parent } = obj
-    const parentSlug = buildSlug(parent)
+//     const { slug, parent } = obj
+//     const parentSlug = buildSlug(parent)
 
-    if (parentSlug)
-      return `${parentSlug}/${slug}`
+//     if (parentSlug)
+//       return `${parentSlug}/${slug}`
 
-    return slug
-  }
+//     return slug
+//   }
 
-  const slug = buildSlug(item.page)
-  return `/${slug}`
-}
+//   const slug = buildSlug(item.page)
+//   return `/${slug}`
+// }
 
 async function generatePreviewUrl(body) {
   const { item } = body
   // const { item, itemType, locale } = body
   const data = await loadData(item.id) // 94688351 //94512920 //93760636
-  const url = generateUrl(data.data)
+  // const url = generateUrl(data.data)
+  const url = generateCommonUrl(data.data.page)
   if (url)
     return url
   else
