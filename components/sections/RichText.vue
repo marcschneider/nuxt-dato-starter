@@ -1,7 +1,5 @@
 <script setup>
-import { Image as DatocmsImage, StructuredText, renderNodeRule } from 'vue-datocms'
-import { isHeading } from 'datocms-structured-text-utils'
-import { ElementsTypography } from '#components'
+import { Image as DatocmsImage, StructuredText, renderMarkRule, renderNodeRule } from 'vue-datocms'
 
 const props = defineProps({
   sectionData: Object,
@@ -43,35 +41,26 @@ function renderBlock({ record }) {
       return null
   }
 }
-
-const customNodeRules = [
-  // renderNodeRule(isHeading, ({ adapter: { renderNode: h }, node, children, key }) => {
-  //   let styleType = 'base'
-  //   if (node.level === 1)
-  //     styleType = 'xl'
-  //   else if (node.level === 2)
-  //     styleType = 'lg'
-  //   else
-  //     styleType = 'base'
-  //   return h(ElementsTypography, {
-  //     key,
-  //     tag: `h${node.level}`,
-  //     styleType,
-  //     text: children[0],
-  //   }, [])
-  // }),
-]
 </script>
 
 <template>
-  <ModulesContainer class="mt-10">
+  <ModulesContainer>
     <StructuredText
       class="col-span-full"
       :data="sectionData.text"
       :render-link-to-record="renderLinkToRecord"
       :render-inline-record="renderInlineRecord"
       :render-block="renderBlock"
-      :custom-node-rules="customNodeRules"
     />
   </ModulesContainer>
 </template>
+
+<style scoped>
+::v-deep h1 {
+  @apply typography-title-lg;
+}
+
+::v-deep a {
+  @apply typography-link;
+}
+</style>

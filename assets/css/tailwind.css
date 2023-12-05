@@ -8,6 +8,15 @@
   }
 }
 
+@layer components {
+  .typography-title-lg {
+    @apply text-8xl;
+  }
+  .typography-link {
+    @apply underline;
+  }
+}
+
 @font-face {
   font-family: "GT Haptik";
   src: url("/fonts/GTHaptikRegular.woff2") format("woff");

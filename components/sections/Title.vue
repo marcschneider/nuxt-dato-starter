@@ -6,11 +6,8 @@ defineProps({
 
 <template>
   <ModulesContainer class="mt-10">
-    <ElementsTypography
-      class="col-span-full"
-      :text="sectionData.title"
-      tag="h2"
-      style-type="xl"
-    />
+    <h2 class="col-span-full typography-title-lg">
+      {{ sectionData.title }}
+    </h2>
   </ModulesContainer>
 </template>
