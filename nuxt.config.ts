@@ -15,7 +15,7 @@ export default defineNuxtConfig({
     },
   },
   plugins: [
-    '~/plugins/gsap',
+    // '~/plugins/gsap',
   ],
   modules: [
     '@nuxtjs/tailwindcss',
@@ -23,8 +23,5 @@ export default defineNuxtConfig({
   ],
   nitro: {
     preset: 'netlify_edge',
-  },
-  app: {
-    pageTransition: { name: 'page', mode: 'out-in' },
   },
 })
