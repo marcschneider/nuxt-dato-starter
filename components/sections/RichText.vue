@@ -46,7 +46,7 @@ function renderBlock({ record }) {
 <template>
   <ModulesContainer>
     <StructuredText
-      class="col-span-full"
+      class="mt-20 desktop:col-span-6 desktop:col-start-4 laptop:col-span-6 laptop:col-start-4 tablet:col-span-6 tablet:col-start-2 phone:col-span-full"
       :data="sectionData.text"
       :render-link-to-record="renderLinkToRecord"
       :render-inline-record="renderInlineRecord"
@@ -61,7 +61,7 @@ function renderBlock({ record }) {
 }
 
 :deep(h3) {
-  @apply typography-title-sm;
+  @apply typography-title-sm mt-6;
 }
 
 :deep(p){
@@ -73,10 +73,10 @@ function renderBlock({ record }) {
 }
 
 :deep(ul) {
-  @apply typography-ul;
+  @apply typography-ul mt-6;
 }
 
 :deep(ol) {
-  @apply typography-ol;
+  @apply typography-ol mt-6;
 }
 </style>

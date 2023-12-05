@@ -10,13 +10,13 @@
 
 @layer components {
   .typography-title-lg {
-    @apply text-9xl;
+    @apply desktop:text-9xl laptop:text-8xl tablet:text-7xl phone:text-6xl;
   }
   .typography-title-md {
-    @apply text-6xl;
+    @apply desktop:text-6xl laptop:text-5xl tablet:text-4xl phone:text-3xl;
   }
   .typography-title-sm {
-    @apply text-2xl;
+    @apply desktop:text-3xl laptop:text-2xl tablet:text-xl phone:text-lg;
   }
   .typography-base {
     @apply text-base;
