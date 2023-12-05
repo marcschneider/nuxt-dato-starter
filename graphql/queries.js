@@ -52,14 +52,58 @@ export const sectionTitle = `
   }
 `
 
+export const responsiveImage = `
+  fragment ResponsiveImageFields on ResponsiveImage {
+    srcSet
+    webpSrcSet
+    sizes
+    src
+    width
+    height
+    aspectRatio
+    alt
+    title
+    base64
+  }
+`
+
 export const sectionRichText = `
+  ${responsiveImage}
+
   fragment SectionRichTextRecordFields on SectionRichTextRecord {
     _modelApiKey
     id
     text {
-      blocks
-      links
+      blocks {
+        __typename
+        ... on ImageRecord {
+          id
+          image {
+            responsiveImage(imgixParams: { w: 1000, auto: format }) {
+              ...ResponsiveImageFields
+            }
+          }
+        }
+      }
       value
+      links {
+        __typename
+        ... on PageRecord {
+          id
+          slug
+          label
+        }
+        ... on BlogRecord {
+          id
+          slug
+          title
+        }
+        ... on TeamRecord {
+          id
+          slug
+          name
+        }
+      }
     }
   }
 `
