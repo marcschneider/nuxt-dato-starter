@@ -7,10 +7,18 @@ const props = defineProps({
   index: Number,
 })
 
+// without async/await, this could be used insied renderLinkToRecord for BlogRecord and TeamRecord
+console.log(await generateSpecialUrl())
+
 function renderLinkToRecord({ record, children, transformedMeta }) {
   switch (record.__typename) {
     case 'PageRecord':
-      return h(NuxtLink, { ...transformedMeta, to: generateCommonUrl(record) }, () => [h('span', {}, [children])])
+      return h(NuxtLink, { ...transformedMeta, to: generateCommonUrl(record) }, () => [h('span', {}, [...children])])
+    case 'BlogRecord':
+      return h('a', { ...transformedMeta, href: '/foo' }, [...children])
+    case 'TeamRecord':
+      return h('a', { ...transformedMeta, href: '/foo' }, [...children])
+
     default:
       return null
   }
