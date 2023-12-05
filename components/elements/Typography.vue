@@ -21,6 +21,7 @@ const buildStyle = computed(() => {
     return 'text-xl font-bold text-gray-900'
   if (props.styleType === 'base')
     return 'text-base font-medium text-gray-500'
+
   return 'text-red-500'
 })
 </script>
