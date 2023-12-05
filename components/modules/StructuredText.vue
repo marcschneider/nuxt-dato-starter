@@ -35,6 +35,7 @@ function renderBlock({ record }) {
       return h(DatocmsImage, {
         'data': record.image.responsiveImage,
         'fade-in-duration': 0,
+        'priority': true,
       })
     default:
       return null
