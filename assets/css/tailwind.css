@@ -25,10 +25,12 @@
     @apply underline;
   }
   .typography-ul {
-    @apply list-disc;
+    @apply list-disc list-inside;
+    p { @apply inline-block }
   }
   .typography-ol {
-    @apply list-decimal;
+    @apply list-decimal list-inside;
+    p { @apply inline-block }
   }
 }
 
