@@ -24,7 +24,4 @@ export default defineNuxtConfig({
   nitro: {
     preset: 'netlify_edge',
   },
-  app: {
-    pageTransition: { name: 'page', mode: 'out-in' },
-  },
 })
