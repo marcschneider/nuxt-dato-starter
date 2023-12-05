@@ -56,11 +56,27 @@ function renderBlock({ record }) {
 </template>
 
 <style scoped>
-::v-deep h1 {
-  @apply typography-title-lg;
+:deep(h2) {
+  @apply typography-title-md;
 }
 
-::v-deep a {
+:deep(h3) {
+  @apply typography-title-sm;
+}
+
+:deep(p){
+  @apply typography-base;
+}
+
+:deep(a) {
   @apply typography-link;
+}
+
+:deep(ul) {
+  @apply typography-ul;
+}
+
+:deep(ol) {
+  @apply typography-ol;
 }
 </style>

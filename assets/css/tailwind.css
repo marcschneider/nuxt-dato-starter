@@ -10,10 +10,25 @@
 
 @layer components {
   .typography-title-lg {
-    @apply text-8xl;
+    @apply text-9xl;
+  }
+  .typography-title-md {
+    @apply text-6xl;
+  }
+  .typography-title-sm {
+    @apply text-2xl;
+  }
+  .typography-base {
+    @apply text-base;
   }
   .typography-link {
     @apply underline;
+  }
+  .typography-ul {
+    @apply list-disc;
+  }
+  .typography-ol {
+    @apply list-decimal;
   }
 }
 
