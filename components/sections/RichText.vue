@@ -3,8 +3,9 @@ import { Image as DatocmsImage, StructuredText, renderNodeRule } from 'vue-datoc
 import { isHeading } from 'datocms-structured-text-utils'
 import { ElementsTypography } from '#components'
 
-defineProps({
+const props = defineProps({
   sectionData: Object,
+  index: Number,
 })
 
 function renderLinkToRecord({ record, children, transformedMeta }) {
@@ -35,7 +36,8 @@ function renderBlock({ record }) {
       return h(DatocmsImage, {
         'data': record.image.responsiveImage,
         'fade-in-duration': 0,
-        'priority': true,
+        // when the image is in the first two blocks, it will be prioritized
+        'priority': props.index <= 1,
       })
     default:
       return null

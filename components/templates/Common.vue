@@ -19,8 +19,9 @@ function dynamicComponent(section) {
 <template>
   <component
     :is="dynamicComponent(section)"
-    v-for="section in pageData.content"
+    v-for="(section, index) in pageData.content"
     :key="section.id"
+    :index="index"
     :section-data="section"
   />
 </template>
