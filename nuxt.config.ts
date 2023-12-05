@@ -15,7 +15,7 @@ export default defineNuxtConfig({
     },
   },
   plugins: [
-    '~/plugins/gsap',
+    // '~/plugins/gsap',
   ],
   modules: [
     '@nuxtjs/tailwindcss',
