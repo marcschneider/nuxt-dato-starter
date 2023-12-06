@@ -39,19 +39,13 @@ export default async function useGraphqlQuery({ query, variables = {} }) {
 async function fetchPublished({ endpoint, token, preview, query, variables, environment }) {
   const data = ref(null)
 
-  let fullEndpoint = endpoint
-
-  if (environment)
-    fullEndpoint = `${fullEndpoint}/environments/${environment}`
-
-  if (preview)
-    fullEndpoint = `${fullEndpoint}/preview`
-
-  const fetchedData = await $fetch(fullEndpoint, {
+  const fetchedData = await $fetch(endpoint, {
     method: 'POST',
     headers: {
       'Content-Type': 'application/json',
       'Authorization': `Bearer ${token}`,
+      'X-Environment': environment,
+      ...(preview && { 'X-Include-Drafts': 'true' }),
     },
     body: JSON.stringify({
       query,
