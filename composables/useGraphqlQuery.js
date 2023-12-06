@@ -1,18 +1,10 @@
 import { useQuerySubscription } from 'vue-datocms'
-
-import type { Preview } from '~/utils/preview'
 import { PREVIEW_MODE_COOKIE_NAME } from '~/utils/preview'
 
 export const isClient = typeof window !== 'undefined'
 export const isServer = typeof window === 'undefined'
 
-export default async function useGraphqlQuery({
-  query,
-  variables = {},
-}: {
-  query: any
-  variables?: Record<string, any>
-}) {
+export default async function useGraphqlQuery({ query, variables = {} }) {
   const runtimeConfig = useRuntimeConfig()
 
   const endpoint = runtimeConfig.public.datocms.endpoint
@@ -20,7 +12,7 @@ export default async function useGraphqlQuery({
   const { preview, token } = await previewAndToken(runtimeConfig)
 
   if (!token)
-    return { data: ref<any>(null) }
+    return { data: ref(null) }
 
   const { data: initialData } = await fetchPublished({
     endpoint,
@@ -44,22 +36,8 @@ export default async function useGraphqlQuery({
   return { data: initialData }
 }
 
-async function fetchPublished({
-  endpoint,
-  token,
-  preview,
-  query,
-  variables,
-  environment,
-}: {
-  endpoint: string
-  token: string
-  preview: boolean
-  query: any
-  variables: Record<string, any>
-  environment?: string
-}) {
-  const data = ref<any>(null)
+async function fetchPublished({ endpoint, token, preview, query, variables, environment }) {
+  const data = ref(null)
 
   let fullEndpoint = endpoint
 
@@ -69,7 +47,6 @@ async function fetchPublished({
   if (preview)
     fullEndpoint = `${fullEndpoint}/preview`
 
-  // use useFetch?
   const fetchedData = await fetch(
     fullEndpoint,
     {
@@ -94,19 +71,7 @@ async function fetchPublished({
   return { data }
 }
 
-async function subscribeToDrafts({
-  query,
-  variables = {},
-  token,
-  initialData,
-  environment,
-}: {
-  query: any
-  variables?: Record<string, any>
-  token: string
-  initialData: any
-  environment?: string
-}) {
+async function subscribeToDrafts({ query, variables = {}, token, initialData, environment }) {
   return useQuerySubscription({
     query,
     variables,
@@ -117,9 +82,7 @@ async function subscribeToDrafts({
   })
 }
 
-async function previewAndToken(
-  runtimeConfig: ReturnType<typeof useRuntimeConfig>,
-) {
+async function previewAndToken(runtimeConfig) {
   const preview = isPreviewEnabled(runtimeConfig)
   const token = await (preview
     ? draftEnabledToken(runtimeConfig)
@@ -131,9 +94,7 @@ async function previewAndToken(
   }
 }
 
-function isPreviewEnabled(
-  runtimeConfig: ReturnType<typeof useRuntimeConfig>,
-): boolean {
+function isPreviewEnabled() {
   const cookie = useCookie(PREVIEW_MODE_COOKIE_NAME)
 
   if (cookie.value)
@@ -142,14 +103,12 @@ function isPreviewEnabled(
   return false
 }
 
-async function draftEnabledToken(
-  runtimeConfig: ReturnType<typeof useRuntimeConfig>,
-) {
+async function draftEnabledToken(runtimeConfig) {
   if (isServer)
     return runtimeConfig.draftEnabledToken
 
   if (isClient) {
-    const preview = await $fetch<Preview>('/api/preview')
+    const preview = await $fetch('/api/preview')
 
     if (isEnabledPreview(preview))
       return preview.token
@@ -158,8 +117,6 @@ async function draftEnabledToken(
   return undefined
 }
 
-async function bundleSafeToken(
-  runtimeConfig: ReturnType<typeof useRuntimeConfig>,
-) {
+async function bundleSafeToken(runtimeConfig) {
   return runtimeConfig.public.datocms.bundleSafeToken
 }
