@@ -69,6 +69,7 @@ async function fetchPublished({
   if (preview)
     fullEndpoint = `${fullEndpoint}/preview`
 
+  // use useFetch?
   const fetchedData = await fetch(
     fullEndpoint,
     {
