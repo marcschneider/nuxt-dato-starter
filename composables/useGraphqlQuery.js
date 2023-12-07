@@ -4,7 +4,7 @@ import { PREVIEW_MODE_COOKIE_NAME } from '~/utils/preview'
 export const isClient = typeof window !== 'undefined'
 export const isServer = typeof window === 'undefined'
 
-export default async function useGraphqlQuery({ query, variables = {} }) {
+export default async ({ query, variables = {} }) => {
   const runtimeConfig = useRuntimeConfig()
 
   const endpoint = runtimeConfig.public.datocms.endpoint
