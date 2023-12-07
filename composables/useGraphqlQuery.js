@@ -9,6 +9,11 @@ export default async ({ query, variables = {} }) => {
   const preview = false
   const token = '5969fabbf7805613775c69ca15f1f7'
 
+  // if (isClient && preview) {
+  //   const { data } = await useFetch('/api/preview')
+  //   console.log(data.value)
+  // }
+
   if (!token)
     return { data: ref(null) }
 
