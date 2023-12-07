@@ -1,5 +1,3 @@
-import { PREVIEW_MODE_COOKIE_NAME, previewModeEncryptionSecretHash } from '~/utils/preview'
-
 export default eventHandler(async (event) => {
   const runtimeConfig = useRuntimeConfig()
 
