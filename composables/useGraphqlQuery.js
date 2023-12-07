@@ -23,12 +23,14 @@ export default async ({ query, variables = {} }) => {
     environment,
   })
 
+  // Subscribe to drafts
   if (isClient && preview) {
-    return subscribeToDrafts({
+    return useQuerySubscription({
       query,
       variables,
-      initialData: initialData.value,
       token,
+      initialData,
+      includeDrafts: true,
       environment,
     })
   }
@@ -47,10 +49,10 @@ async function fetchPublished({ endpoint, token, preview, query, variables, envi
       'X-Environment': environment,
       ...(preview && { 'X-Include-Drafts': 'true' }),
     },
-    body: JSON.stringify({
+    body: {
       query,
       variables,
-    }),
+    },
   })
 
   if ('errors' in fetchedData)
@@ -60,17 +62,6 @@ async function fetchPublished({ endpoint, token, preview, query, variables, envi
     data.value = fetchedData.data
 
   return { data }
-}
-
-async function subscribeToDrafts({ query, variables = {}, token, initialData, environment }) {
-  return useQuerySubscription({
-    query,
-    variables,
-    token,
-    initialData,
-    includeDrafts: true,
-    environment,
-  })
 }
 
 async function previewAndToken(runtimeConfig) {
