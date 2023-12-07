@@ -8,7 +8,7 @@ const props = defineProps({
 })
 
 // without async/await, this could be used insied renderLinkToRecord for BlogRecord and TeamRecord
-console.log(await generateSpecialUrl())
+// console.log(await generateSpecialUrl())
 
 function renderLinkToRecord({ record, children, transformedMeta }) {
   switch (record.__typename) {

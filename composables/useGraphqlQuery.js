@@ -9,12 +9,14 @@ export default async ({ query, variables = {} }) => {
 
   const endpoint = runtimeConfig.public.datocms.endpoint
   const environment = runtimeConfig.public.datocms.environment
-  const { preview, token } = await previewAndToken(runtimeConfig)
+  // const { preview, token } = await previewAndToken(runtimeConfig)
+  const preview = false
+  const token = '5969fabbf7805613775c69ca15f1f7'
 
   if (!token)
     return { data: ref(null) }
 
-  const { data: initialData } = await fetchPublished({
+  const initialData = await fetchPublished({
     endpoint,
     token,
     preview,
@@ -23,25 +25,25 @@ export default async ({ query, variables = {} }) => {
     environment,
   })
 
-  // Subscribe to drafts
-  if (isClient && preview) {
-    return useQuerySubscription({
-      query,
-      variables,
-      token,
-      initialData,
-      includeDrafts: true,
-      environment,
-    })
-  }
+  // if (isClient && preview) {
+  //   return useQuerySubscription({
+  //     query,
+  //     variables,
+  //     token,
+  //     initialData,
+  //     includeDrafts: true,
+  //     environment,
+  //   })
+  // }
 
   return { data: initialData }
 }
 
 async function fetchPublished({ endpoint, token, preview, query, variables, environment }) {
-  const data = ref(null)
+  const normalizedData = ref(null)
 
-  const fetchedData = await $fetch(endpoint, {
+  const { data } = await useFetch(endpoint, {
+    key: JSON.stringify({ query, variables }),
     method: 'POST',
     headers: {
       'Content-Type': 'application/json',
@@ -55,13 +57,13 @@ async function fetchPublished({ endpoint, token, preview, query, variables, envi
     },
   })
 
-  if ('errors' in fetchedData)
-    throw JSON.stringify(fetchedData.errors)
+  // if ('errors' in fetchedData)
+  //   throw JSON.stringify(fetchedData.errors)
 
-  if ('data' in fetchedData)
-    data.value = fetchedData.data
+  // if ('data' in fetchedData)
+  normalizedData.value = data.value.data
 
-  return { data }
+  return normalizedData
 }
 
 async function previewAndToken(runtimeConfig) {
