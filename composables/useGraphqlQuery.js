@@ -1,6 +1,4 @@
 import { useQuerySubscription } from 'vue-datocms'
-import { PREVIEW_MODE_COOKIE_NAME } from '~/utils/preview'
-import { isClient, isServer } from '~/utils/environmentCheck'
 
 export default async ({ query, variables = {} }) => {
   const runtimeConfig = useRuntimeConfig()
