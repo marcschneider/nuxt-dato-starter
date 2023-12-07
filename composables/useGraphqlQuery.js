@@ -1,8 +1,6 @@
 import { useQuerySubscription } from 'vue-datocms'
 import { PREVIEW_MODE_COOKIE_NAME } from '~/utils/preview'
-
-export const isClient = typeof window !== 'undefined'
-export const isServer = typeof window === 'undefined'
+import { isClient, isServer } from '~/utils/environmentCheck'
 
 export default async ({ query, variables = {} }) => {
   const runtimeConfig = useRuntimeConfig()
@@ -25,16 +23,16 @@ export default async ({ query, variables = {} }) => {
     environment,
   })
 
-  // if (isClient && preview) {
-  //   return useQuerySubscription({
-  //     query,
-  //     variables,
-  //     token,
-  //     initialData,
-  //     includeDrafts: true,
-  //     environment,
-  //   })
-  // }
+  if (isClient && preview) {
+    return useQuerySubscription({
+      query,
+      variables,
+      token,
+      initialData,
+      includeDrafts: true,
+      environment,
+    })
+  }
 
   return { data: initialData }
 }
@@ -57,10 +55,6 @@ async function fetchPublished({ endpoint, token, preview, query, variables, envi
     },
   })
 
-  // if ('errors' in fetchedData)
-  //   throw JSON.stringify(fetchedData.errors)
-
-  // if ('data' in fetchedData)
   normalizedData.value = data.value.data
 
   return normalizedData
