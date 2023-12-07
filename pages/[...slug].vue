@@ -20,8 +20,6 @@ const [prop] = Object.keys(pageData.value)
 const tags = pageData.value[prop]._seoMetaTags
 
 useHead(() => {
-  // if (!data.value)
-  //   return {}
   return toHead(tags)
 })
 </script>
