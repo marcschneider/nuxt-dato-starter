@@ -16,11 +16,11 @@ function dynamicComponent(section) {
 </script>
 
 <template>
-  <ModulesContainer class="mt-10">
+  <ElementsContainer class="mt-10">
     <h1 class="mb-8 text-4xl col-span-full">
       {{ pageData.title }}
     </h1>
-  </ModulesContainer>
+  </ElementsContainer>
   <component
     :is="dynamicComponent(section)"
     v-for="(section, index) in pageData.content"

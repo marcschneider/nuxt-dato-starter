@@ -49,7 +49,7 @@ function renderBlock({ record }) {
 </script>
 
 <template>
-  <ModulesContainer>
+  <ElementsContainer>
     <StructuredText
       class="mt-20 desktop:col-span-6 desktop:col-start-4 laptop:col-span-6 laptop:col-start-4 tablet:col-span-6 tablet:col-start-2 phone:col-span-full"
       :data="sectionData.text"
@@ -57,7 +57,7 @@ function renderBlock({ record }) {
       :render-inline-record="renderInlineRecord"
       :render-block="renderBlock"
     />
-  </ModulesContainer>
+  </ElementsContainer>
 </template>
 
 <style scoped>

@@ -1,3 +1,3 @@
 <template>
-  <ModulesAlert />
+  <ElementsAlert />
 </template>

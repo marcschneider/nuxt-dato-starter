@@ -5,9 +5,9 @@ defineProps({
 </script>
 
 <template>
-  <ModulesContainer class="mt-10">
+  <ElementsContainer class="mt-10">
     <h2 class="col-span-full typography-title-lg">
       {{ sectionData.title }}
     </h2>
-  </ModulesContainer>
+  </ElementsContainer>
 </template>
