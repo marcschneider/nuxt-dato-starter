@@ -14,7 +14,7 @@ export default eventHandler(async (event) => {
       event,
       createError({
         statusCode: 401,
-        message: 'Missing or invalid `secret` query string parameter!',
+        statusMessage: 'Missing or invalid `secret` query string parameter!',
       }),
     )
 
