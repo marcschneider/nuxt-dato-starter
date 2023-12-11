@@ -3,7 +3,7 @@ import { toHead } from 'vue-datocms'
 
 let pageData = null
 let slugType = null
-const specialSlug = await isSpecialSlug()
+const specialSlug = isSpecialSlug()
 
 if (specialSlug) {
   const specialPageData = await loadSpecialPage(specialSlug)

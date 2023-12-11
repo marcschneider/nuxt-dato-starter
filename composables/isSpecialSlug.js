@@ -1,6 +1,4 @@
-import { specialSlugsQuery } from '~/graphql/queries'
-
-export default async function () {
+export default function () {
   const route = useRoute()
   const routeParams = route.path.split('/').filter(Boolean)
   const lastRouteItem = routeParams.pop()
@@ -14,17 +12,8 @@ export default async function () {
     }
   }
 
-  const { data } = await useGraphqlQuery({
-    query: specialSlugsQuery,
-  })
-
-  if (!data?.value?.setting) {
-    throw createError({
-      statusCode: 404,
-    })
-  }
-
-  const slugType = checkSpecialSlugs(data.value.setting)
+  const pageStore = usePageStore()
+  const slugType = checkSpecialSlugs(pageStore.specialSlugs)
 
   if (slugType) {
     return {

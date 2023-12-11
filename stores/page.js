@@ -10,9 +10,18 @@ export const usePageStore = defineStore('page', {
   },
   actions: {
     async loadSpecialSlugs() {
-      this.specialSlugs = await useGraphqlQuery({
+      const { data } = await useGraphqlQuery({
         query: specialSlugsQuery,
       })
+
+      if (data?.value?.setting) {
+        this.specialSlugs = data.value.setting
+      }
+      else {
+        throw createError({
+          statusCode: 404,
+        })
+      }
     },
   },
 })
