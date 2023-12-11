@@ -6,9 +6,15 @@ definePageMeta({
 const cookie = useCookie(PREVIEW_MODE_COOKIE_NAME)
 const isPreview = computed(() => !!cookie.value)
 const password = ref('')
+const errorMessage = ref('')
 
-function enablePreview() {
-  window.location.href = `/api/enable-preview?secret=${password.value}`
+async function enablePreview() {
+  const response = await fetch(`/api/enable-preview?secret=${password.value}`)
+
+  if (response.status === 401)
+    errorMessage.value = 'Invalid password'
+  else
+    window.location.href = response.url
 }
 
 function disablePreview() {
@@ -22,6 +28,9 @@ function disablePreview() {
       <form @submit.prevent="enablePreview">
         <label for="password" class="sr-only">Password</label>
         <input id="password" v-model="password" type="password" placeholder="Password" class="w-full px-3 py-2 mb-4 text-gray-900 placeholder-gray-500 rounded-lg focus:outline-none focus:shadow-outline-blue focus:border-blue-300">
+        <p v-if="errorMessage" class="text-red-500">
+          {{ errorMessage }}
+        </p>
         <button type="submit" class="w-full px-3 py-2 text-white bg-blue-500 rounded-md hover:bg-blue-600 focus:outline-none">
           Submit
         </button>
