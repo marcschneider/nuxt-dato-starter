@@ -10,26 +10,26 @@
 
 @layer components {
   .typography-title-lg {
-    @apply desktop:text-9xl laptop:text-8xl tablet:text-7xl phone:text-6xl;
+    @apply desktop:text-9xl laptop:text-8xl tablet:text-7xl phone:text-6xl font-haptik;
   }
   .typography-title-md {
-    @apply desktop:text-6xl laptop:text-5xl tablet:text-4xl phone:text-3xl;
+    @apply desktop:text-6xl laptop:text-5xl tablet:text-4xl phone:text-3xl font-haptik;
   }
   .typography-title-sm {
-    @apply desktop:text-3xl laptop:text-2xl tablet:text-xl phone:text-lg;
+    @apply desktop:text-3xl laptop:text-2xl tablet:text-xl phone:text-lg font-haptik;
   }
   .typography-base {
-    @apply text-base;
+    @apply text-base font-haptik;
   }
   .typography-link {
-    @apply underline;
+    @apply underline font-haptik;
   }
   .typography-ul {
-    @apply list-disc list-inside;
+    @apply list-disc list-inside font-haptik;
     p { @apply inline-block }
   }
   .typography-ol {
-    @apply list-decimal list-inside;
+    @apply list-decimal list-inside font-haptik;
     p { @apply inline-block }
   }
 }
