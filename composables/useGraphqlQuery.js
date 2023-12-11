@@ -5,14 +5,7 @@ export default async ({ query, variables = {} }) => {
 
   const endpoint = runtimeConfig.public.datocms.endpoint
   const environment = runtimeConfig.public.datocms.environment
-  // const { preview, token } = await previewAndToken(runtimeConfig)
-  const preview = false
-  const token = '5969fabbf7805613775c69ca15f1f7'
-
-  // if (isClient && preview) {
-  //   const { data } = await useFetch('/api/preview')
-  //   console.log(data.value)
-  // }
+  const { preview, token } = previewAndToken(runtimeConfig)
 
   if (!token)
     return { data: ref(null) }
@@ -63,9 +56,9 @@ async function fetchPublished({ endpoint, token, preview, query, variables, envi
   return normalizedData
 }
 
-async function previewAndToken(runtimeConfig) {
+function previewAndToken(runtimeConfig) {
   const preview = isPreviewEnabled(runtimeConfig)
-  const token = await (preview
+  const token = (preview
     ? draftEnabledToken(runtimeConfig)
     : bundleSafeToken(runtimeConfig))
 
@@ -84,20 +77,10 @@ function isPreviewEnabled() {
   return false
 }
 
-async function draftEnabledToken(runtimeConfig) {
-  if (isServer)
-    return runtimeConfig.draftEnabledToken
-
-  if (isClient) {
-    const preview = await $fetch('/api/preview')
-
-    if (isEnabledPreview(preview))
-      return preview.token
-  }
-
-  return undefined
+function draftEnabledToken(runtimeConfig) {
+  return runtimeConfig.public.datocms.draftEnabledToken
 }
 
-async function bundleSafeToken(runtimeConfig) {
+function bundleSafeToken(runtimeConfig) {
   return runtimeConfig.public.datocms.bundleSafeToken
 }

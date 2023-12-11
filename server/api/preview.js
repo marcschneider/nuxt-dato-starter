@@ -11,7 +11,7 @@ export default eventHandler(async (event) => {
   if (cookie === hash) {
     return {
       enabled: true,
-      token: runtimeConfig.draftEnabledToken,
+      token: runtimeConfig.public.datocms.draftEnabledToken,
     }
   }
 
