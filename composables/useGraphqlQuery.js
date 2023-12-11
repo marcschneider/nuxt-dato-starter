@@ -36,7 +36,7 @@ export default async ({ query, variables = {} }) => {
 async function fetchPublished({ endpoint, token, preview, query, variables, environment }) {
   const normalizedData = ref(null)
 
-  const { data } = await useFetch(endpoint, {
+  const { data, error } = await useFetch(endpoint, {
     key: JSON.stringify({ query, variables }),
     method: 'POST',
     headers: {
@@ -50,6 +50,20 @@ async function fetchPublished({ endpoint, token, preview, query, variables, envi
       variables,
     },
   })
+
+  // Network error
+  if (error.value) {
+    throw createError({
+      statusCode: error.value.statusCode,
+    })
+  }
+
+  // Data error
+  if (data.value.errors || !data.value.data) {
+    throw createError({
+      statusCode: 404,
+    })
+  }
 
   normalizedData.value = data.value.data
 
