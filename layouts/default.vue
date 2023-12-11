@@ -4,7 +4,7 @@ const isPreview = computed(() => !!cookie.value)
 </script>
 
 <template>
-  <ElementsPreview v-if="isPreview" />
+  <ElementsPreview v-if="isPreview" class="z-10" />
   <div class="flex flex-col min-h-screen">
     <SectionsHeader />
     <div class="flex-grow">

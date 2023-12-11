@@ -6,9 +6,15 @@ function disablePreview() {
 </script>
 
 <template>
-  <div class="fixed w-2/12 p-5 font-mono text-sm text-white bg-green-800 rounded-md bottom-5 right-5">
-    This is page is showing draft content.
-    <a class="underline" @click="disablePreview">Click here</a>
-    to exit preview mode.
+  <div class="fixed w-56 p-5 text-green-800 bg-green-200 rounded-md bottom-5 right-5">
+    <p class="mb-3 text-sm font-bold">
+      Draft mode is enabled
+    </p>
+    <button
+      class="w-full px-3 py-2 text-sm font-bold text-white bg-green-500 rounded hover:bg-green-600 focus:outline-none"
+      @click="disablePreview"
+    >
+      Disable
+    </button>
   </div>
 </template>

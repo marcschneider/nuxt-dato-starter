@@ -23,7 +23,7 @@ function disablePreview() {
 </script>
 
 <template>
-  <div class="flex items-center justify-center h-screen">
+  <div class="flex items-center justify-center h-screen bg-neutral-50">
     <div v-if="!isPreview" class="p-6 bg-white rounded shadow-md w-72">
       <p class="mb-4 text-lg font-bold">
         Enable preview mode
@@ -42,7 +42,7 @@ function disablePreview() {
             {{ errorMessage }}
           </p>
         </div>
-        <button type="submit" class="w-full px-3 py-2 text-white bg-green-500 rounded hover:bg-green-600 focus:outline-none">
+        <button type="submit" class="w-full px-3 py-2 font-bold text-white bg-green-500 rounded hover:bg-green-600 focus:outline-none">
           Enable
         </button>
       </form>
@@ -52,7 +52,7 @@ function disablePreview() {
         Preview is enabled
       </p>
       <button
-        class="w-full px-3 py-2 text-white bg-green-500 rounded hover:bg-green-600 focus:outline-none"
+        class="w-full px-3 py-2 font-bold text-white bg-green-500 rounded hover:bg-green-600 focus:outline-none"
         @click="disablePreview"
       >
         Disable
