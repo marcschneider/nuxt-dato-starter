@@ -1,6 +1,7 @@
 <script setup>
+const route = useRoute()
 function disablePreview() {
-  window.location.href = '/api/disable-preview'
+  window.location.href = `/api/disable-preview?redirect=${route.fullPath}`
 }
 </script>
 
