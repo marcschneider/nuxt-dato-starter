@@ -59,7 +59,7 @@ async function generateRedirectUrl({ item, itemType }) {
 }
 
 export default eventHandler(async (event) => {
-  const hostname = getRequestHost(event)
+  const hostname = process.env.URL
 
   setResponseHeaders(event, {
     'Content-Type': 'application/json',
