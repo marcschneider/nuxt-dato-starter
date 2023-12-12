@@ -9,6 +9,8 @@ const runtimeConfig = useRuntimeConfig()
 const endpoint = runtimeConfig.public.datocms.endpoint
 const environment = runtimeConfig.public.datocms.environment
 const token = runtimeConfig.public.datocms.draftEnabledToken
+const secret = runtimeConfig.previewModePassword
+const baseUrl = 'https://develop--unknown-dato.netlify.app'
 
 async function loadData(query, pageId) {
   const { data } = await $fetch(endpoint, {
@@ -72,16 +74,12 @@ export default eventHandler(async (event) => {
   return {
     previewLinks: [
       {
-        label: 'Vorschau',
-        url: 'https://develop--unknown-dato.netlify.app/api/enable-preview?secret=42&redirect=/blog/marc',
+        label: '🔍 Vorschau',
+        url: `${baseUrl}/api/enable-preview?secret=${secret}&redirect==${url}`,
       },
       {
-        label: 'Live',
-        url: 'https://develop--unknown-dato.netlify.app/api/disable-preview?redirect=/blog/marc',
-      },
-      {
-        label: 'Data',
-        url: `https://develop--unknown-dato.netlify.app/api/disable-preview?redirect=${url}`,
+        label: '⚡ Live',
+        url: `${baseUrl}/api/disable-preview?redirect==${url}`,
       },
     ],
   }
