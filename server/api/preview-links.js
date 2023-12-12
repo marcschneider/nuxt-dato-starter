@@ -30,7 +30,7 @@ async function loadData(query, pageId) {
 
 async function generatePreviewUrl({ item, itemType }) {
   const itemId = item.id
-  const type = itemType.attributes.api_ke
+  const type = itemType.attributes.api_key
 
   let data = null
   let url
