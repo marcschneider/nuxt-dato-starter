@@ -52,10 +52,10 @@ async function generatePreviewUrl(body) {
   // const { item, itemType, locale } = body
   const data = await loadData(item.id) // 94688351 //94512920 //93760636
 
-  return JSON.stringify(data)
-
   // const url = generateUrl(data.data)
-  // const url = generateCommonUrl(data.data.page)
+  const url = generateCommonUrl(data.data.page)
+
+  return url
 
   // if (url)
   //   return url
