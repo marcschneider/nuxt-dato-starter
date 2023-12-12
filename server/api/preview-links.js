@@ -48,10 +48,20 @@ async function loadData(pageId) {
 
 async function generatePreviewUrl(body) {
   const { item } = body
+
+  console.log(`body: ${body}`)
+  console.log(`item: ${item}`)
+
   // const { item, itemType, locale } = body
   const data = await loadData(item.id) // 94688351 //94512920 //93760636
+
+  console.log(`data: ${data}`)
+
   // const url = generateUrl(data.data)
   const url = generateCommonUrl(data.data.page)
+
+  console.log(`url: ${url}`)
+
   if (url)
     return url
   else
@@ -82,6 +92,7 @@ export default eventHandler(async (event) => {
     return send(event, 'ok')
 
   const url = await generatePreviewUrl(await readBody(event))
+  const url2 = '/about'
 
   return {
     previewLinks: [
@@ -95,7 +106,7 @@ export default eventHandler(async (event) => {
       },
       {
         label: 'Data',
-        url: `https://develop--unknown-dato.netlify.app/api/disable-preview?redirect=${url}`,
+        url: `https://develop--unknown-dato.netlify.app/api/disable-preview?redirect=${url2}`,
       },
     ],
   }
