@@ -49,16 +49,18 @@ async function loadData(pageId) {
 async function generatePreviewUrl(body) {
   const { item } = body
 
+  return item
+
   // const { item, itemType, locale } = body
-  const data = await loadData(item.id) // 94688351 //94512920 //93760636
+  // const data = await loadData(item.id) // 94688351 //94512920 //93760636
 
   // const url = generateUrl(data.data)
-  const url = generateCommonUrl(data.data.page)
+  // const url = generateCommonUrl(data.data.page)
 
-  if (url)
-    return url
-  else
-    return null
+  // if (url)
+  //   return url
+  // else
+  //   return null
 
   // switch (itemType.attributes.api_key) {
   //   case 'page':
@@ -84,9 +86,7 @@ export default eventHandler(async (event) => {
   if (event.node.req.method === 'OPTIONS')
     return send(event, 'ok')
 
-  // const url = await generatePreviewUrl(await readBody(event))
-  console.log('foo')
-  const url2 = '/about'
+  const url = await generatePreviewUrl(await readBody(event))
 
   return {
     previewLinks: [
@@ -100,7 +100,7 @@ export default eventHandler(async (event) => {
       },
       {
         label: 'Data',
-        url: `https://develop--unknown-dato.netlify.app/api/disable-preview?redirect=${url2}`,
+        url: `https://develop--unknown-dato.netlify.app/api/disable-preview?redirect=${url}`,
       },
     ],
   }
