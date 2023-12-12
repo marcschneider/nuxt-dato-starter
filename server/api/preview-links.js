@@ -73,7 +73,7 @@ export default eventHandler(async (event) => {
   const redirect = await generateRedirectUrl(await readBody(event))
 
   if (!redirect)
-    return send(event, 'Not found', 404)
+    return { previewLinks: [] }
 
   return {
     previewLinks: [
