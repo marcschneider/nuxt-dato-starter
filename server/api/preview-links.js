@@ -3,15 +3,12 @@ import {
   previewLinkPageQuery,
   previewLinkTeamQuery,
 } from '~/graphql/queries'
-import generateCommonUrl from '~/composables/generateCommonUrl'
 
 const runtimeConfig = useRuntimeConfig()
 const endpoint = runtimeConfig.public.datocms.endpoint
 const environment = runtimeConfig.public.datocms.environment
 const token = runtimeConfig.public.datocms.draftEnabledToken
 const secret = runtimeConfig.previewModePassword
-const requestURL = useRequestURL()
-const hostname = requestURL.hostname
 
 async function loadData(query, pageId) {
   const { data } = await $fetch(endpoint, {
@@ -61,6 +58,9 @@ async function generateRedirectUrl({ item, itemType }) {
 }
 
 export default eventHandler(async (event) => {
+  const requestURL = useRequestURL()
+  const hostname = requestURL.hostname
+
   setResponseHeaders(event, {
     'Content-Type': 'application/json',
     'Access-Control-Allow-Origin': '*',
