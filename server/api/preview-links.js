@@ -59,8 +59,9 @@ async function generateRedirectUrl({ item, itemType }) {
 }
 
 export default eventHandler(async (event) => {
-  const requestURL = useRequestURL()
-  const hostname = requestURL.hostname
+  // const requestURL = useRequestURL()
+  // const hostname = requestURL.hostname
+  const hostname = 'https://develop--unknown-dato.netlify.app'
 
   setResponseHeaders(event, {
     'Content-Type': 'application/json',
