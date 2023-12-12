@@ -10,7 +10,8 @@ const endpoint = runtimeConfig.public.datocms.endpoint
 const environment = runtimeConfig.public.datocms.environment
 const token = runtimeConfig.public.datocms.draftEnabledToken
 const secret = runtimeConfig.previewModePassword
-const baseUrl = 'https://develop--unknown-dato.netlify.app'
+const requestURL = useRequestURL()
+const hostname = requestURL.hostname
 
 async function loadData(query, pageId) {
   const { data } = await $fetch(endpoint, {
@@ -79,11 +80,11 @@ export default eventHandler(async (event) => {
     previewLinks: [
       {
         label: '🔍 Preview',
-        url: `${baseUrl}/api/enable-preview?secret=${secret}&redirect=${redirect}`,
+        url: `${hostname}/api/enable-preview?secret=${secret}&redirect=${redirect}`,
       },
       {
         label: '⚡ Live',
-        url: `${baseUrl}/api/disable-preview?redirect=${redirect}`,
+        url: `${hostname}/api/disable-preview?redirect=${redirect}`,
       },
     ],
   }
