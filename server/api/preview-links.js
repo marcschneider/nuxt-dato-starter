@@ -11,6 +11,7 @@ const environment = runtimeConfig.public.datocms.environment
 const token = runtimeConfig.public.datocms.draftEnabledToken
 const secret = runtimeConfig.previewModePassword
 const baseUrl = 'https://develop--unknown-dato.netlify.app'
+const preview = true
 
 async function loadData(query, pageId) {
   const { data } = await $fetch(endpoint, {
@@ -19,6 +20,7 @@ async function loadData(query, pageId) {
       'Content-Type': 'application/json',
       'Authorization': `Bearer ${token}`,
       'X-Environment': environment,
+      ...(preview && { 'X-Include-Drafts': 'true' }),
     },
     body: {
       query,
