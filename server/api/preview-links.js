@@ -16,7 +16,7 @@ async function loadData(pageId) {
   const data = await $fetch('https://graphql.datocms.com/', {
     method: 'POST',
     headers: {
-      Authorization: `Bearer 04311cbb1d838ee1c833a3d20cdeb8`,
+      Authorization: `Bearer 5969fabbf7805613775c69ca15f1f7`,
     },
     body: {
       query: pageQuery,
