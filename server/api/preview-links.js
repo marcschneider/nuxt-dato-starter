@@ -13,7 +13,7 @@ const pageQuery = `
 `
 
 async function loadData(pageId) {
-  const data = await $fetch('https://graphql.datocms.com/', {
+  const { data } = await $fetch('https://graphql.datocms.com/', {
     method: 'POST',
     headers: {
       Authorization: `Bearer 5969fabbf7805613775c69ca15f1f7`,
@@ -53,9 +53,9 @@ async function generatePreviewUrl(body) {
   const data = await loadData(item.id) // 94688351 //94512920 //93760636
 
   // const url = generateUrl(data.data)
-  const url = generateCommonUrl(data.data.page)
+  // const url = generateCommonUrl(data.data.page)
 
-  return url
+  return data
 
   // if (url)
   //   return url
