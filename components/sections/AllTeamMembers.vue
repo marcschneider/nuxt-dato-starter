@@ -23,13 +23,6 @@ const { data } = await useFetch('https://graphql.datocms.com', {
   watch: [count],
 })
 
-// Should be a composable
-function buildLink(slug) {
-  const pageStore = usePageStore()
-  const specialSlugs = pageStore.specialSlugs
-  const teamSlug = specialSlugs.specialSlugTeam.replace(/^\/|\/$/g, '')
-  return `/${teamSlug}/${slug}`
-}
 </script>
 
 <template>
@@ -42,7 +35,7 @@ function buildLink(slug) {
         v-for="item in data.data.allTeams"
         :key="item.id"
         class="block p-6 mb-6 shadow-md w-72"
-        :to="buildLink(item.slug)"
+        :to="generateSpecialUrl(item.slug)"
       >
         {{ item.name }}
       </NuxtLink>
