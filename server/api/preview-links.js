@@ -59,7 +59,7 @@ async function generateRedirectUrl({ item, itemType }) {
 }
 
 export default eventHandler(async (event) => {
-  const hostname = process.env.URL
+  const hostname = process.env.DEPLOY_PRIME_URL
 
   setResponseHeaders(event, {
     'Content-Type': 'application/json',
