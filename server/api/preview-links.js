@@ -1,25 +1,20 @@
-const pageQuery = `
-  query Page($pageId: ItemId) {
-    page(filter: {id: {eq: $pageId}}) {
-      slug
-      parent {
-        slug
-        parent {
-          slug
-        }
-      }
-    }
-  }
-`
+import { previewLinkPageQuery } from '~/graphql/queries'
+
+const runtimeConfig = useRuntimeConfig()
+const endpoint = runtimeConfig.public.datocms.endpoint
+const environment = runtimeConfig.public.datocms.environment
+const token = runtimeConfig.public.datocms.draftEnabledToken
 
 async function loadData(pageId) {
-  const { data } = await $fetch('https://graphql.datocms.com/', {
+  const { data } = await $fetch(endpoint, {
     method: 'POST',
     headers: {
-      Authorization: `Bearer 5969fabbf7805613775c69ca15f1f7`,
+      'Content-Type': 'application/json',
+      'Authorization': `Bearer ${token}`,
+      'X-Environment': environment,
     },
     body: {
-      query: pageQuery,
+      query: previewLinkPageQuery,
       variables: {
         pageId,
       },
@@ -28,34 +23,15 @@ async function loadData(pageId) {
   return data || null
 }
 
-// function generateUrl(item) {
-//   function buildSlug(obj) {
-//     if (!obj)
-//       return ''
-
-//     const { slug, parent } = obj
-//     const parentSlug = buildSlug(parent)
-
-//     if (parentSlug)
-//       return `${parentSlug}/${slug}`
-
-//     return slug
-//   }
-
-//   const slug = buildSlug(item.page)
-//   return `/${slug}`
-// }
-
 async function generatePreviewUrl(body) {
   const { item } = body
 
   // const { item, itemType, locale } = body
   const data = await loadData(item.id) // 94688351 //94512920 //93760636
 
-  // const url = generateUrl(data.data)
   // const url = generateCommonUrl(data.data.page)
 
-  return data
+  return JSON.stringify(data)
 
   // if (url)
   //   return url

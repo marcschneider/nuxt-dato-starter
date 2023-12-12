@@ -1,3 +1,17 @@
+export const previewLinkPageQuery = `
+  query Page($pageId: ItemId) {
+    page(filter: {id: {eq: $pageId}}) {
+      slug
+      parent {
+        slug
+        parent {
+          slug
+        }
+      }
+    }
+  }
+`
+
 export const menuHeaderQuery = `
   query MenuHeaderQuery {
     layout {
