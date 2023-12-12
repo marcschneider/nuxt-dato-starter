@@ -75,11 +75,11 @@ export default eventHandler(async (event) => {
     previewLinks: [
       {
         label: '🔍 Vorschau',
-        url: `${baseUrl}/api/enable-preview?secret=${secret}&redirect==${redirect}`,
+        url: `${baseUrl}/api/enable-preview?secret=${secret}&redirect=${redirect}`,
       },
       {
         label: '⚡ Live',
-        url: `${baseUrl}/api/disable-preview?redirect==${redirect}`,
+        url: `${baseUrl}/api/disable-preview?redirect=${redirect}`,
       },
     ],
   }
