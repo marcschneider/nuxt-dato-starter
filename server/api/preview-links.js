@@ -28,32 +28,29 @@ async function loadData(query, pageId) {
   return data || null
 }
 
-const typeMapping = {
-  page: {
-    query: previewLinkPageQuery,
-    url: data => generateCommonUrl(data.page),
-  },
-  blog: {
-    query: previewLinkBlogQuery,
-    url: data => `/${data.setting.specialSlugBlog}/${data.blog.slug}`,
-  },
-  team: {
-    query: previewLinkTeamQuery,
-    url: data => `/${data.setting.specialSlugTeam}/${data.team.slug}`,
-  },
-}
-
 async function generatePreviewUrl({ item, itemType }) {
   const itemId = item.id
   const type = itemType.attributes.api_ke
 
-  if (!typeMapping[type])
-    return null
+  let data = null
+  let url
 
-  const data = await loadData(typeMapping[type].query, itemId)
-  const url = typeMapping[type].url(data)
-
-  return url
+  switch (type) {
+    case 'page':
+      data = await loadData(previewLinkPageQuery, itemId)
+      url = generateCommonUrl(data.page)
+      return `${url}`
+    case 'blog':
+      data = await loadData(previewLinkBlogQuery, itemId)
+      url = `/${data.setting.specialSlugBlog}/${data.blog.slug}`
+      return `${url}`
+    case 'team':
+      data = await loadData(previewLinkTeamQuery, itemId)
+      url = `/${data.setting.specialSlugTeam}/${data.team.slug}`
+      return `${url}`
+    default:
+      return null
+  }
 }
 
 export default eventHandler(async (event) => {
