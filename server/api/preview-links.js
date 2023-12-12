@@ -74,7 +74,7 @@ export default eventHandler(async (event) => {
   return {
     previewLinks: [
       {
-        label: '🔍 Vorschau',
+        label: '🔍 Preview',
         url: `${baseUrl}/api/enable-preview?secret=${secret}&redirect=${redirect}`,
       },
       {

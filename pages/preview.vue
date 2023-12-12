@@ -36,13 +36,13 @@ function disablePreview() {
             v-model="password"
             type="password"
             placeholder="Password"
-            class="w-full px-3 py-2 mb-2 text-black placeholder-gray-500 bg-gray-100 rounded focus:outline-none focus:ring-2 focus:ring-green-500"
+            class="w-full px-3 py-2 mb-2 text-black placeholder-gray-500 bg-gray-100 rounded focus:outline-none focus:ring-2 focus:ring-blue-500"
           >
           <p v-if="errorMessage" class="text-sm text-red-500">
             {{ errorMessage }}
           </p>
         </div>
-        <button type="submit" class="w-full px-3 py-2 font-bold text-white bg-green-500 rounded hover:bg-green-600 focus:outline-none">
+        <button type="submit" class="w-full px-3 py-2 font-bold text-white bg-blue-500 rounded hover:bg-blue-600 focus:outline-none">
           Enable
         </button>
       </form>
@@ -52,7 +52,7 @@ function disablePreview() {
         Preview is enabled
       </p>
       <button
-        class="w-full px-3 py-2 font-bold text-white bg-green-500 rounded hover:bg-green-600 focus:outline-none"
+        class="w-full px-3 py-2 font-bold text-white bg-blue-500 rounded hover:bg-blue-600 focus:outline-none"
         @click="disablePreview"
       >
         Disable
