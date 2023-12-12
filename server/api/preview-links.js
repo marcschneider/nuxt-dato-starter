@@ -3,6 +3,7 @@ import {
   previewLinkPageQuery,
   previewLinkTeamQuery,
 } from '~/graphql/queries'
+import generateCommonUrl from '~/composables/generateCommonUrl'
 
 const runtimeConfig = useRuntimeConfig()
 const endpoint = runtimeConfig.public.datocms.endpoint
@@ -58,9 +59,8 @@ async function generateRedirectUrl({ item, itemType }) {
 }
 
 export default eventHandler(async (event) => {
-  // const requestURL = useRequestURL()
-  // const hostname = requestURL.hostname
-  const hostname = 'https://develop--unknown-dato.netlify.app'
+  const requestURL = useRequestURL()
+  const hostname = requestURL.hostname
 
   setResponseHeaders(event, {
     'Content-Type': 'application/json',
