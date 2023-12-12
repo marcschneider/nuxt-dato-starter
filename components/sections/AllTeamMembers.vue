@@ -19,11 +19,11 @@ const { data } = await useFetch('https://graphql.datocms.com', {
       count,
     },
   },
+  // Add dynamic overwrite for watch to useGraphqlQuery
   watch: [count],
 })
 
 // Should be a composable
-// Should also work for blogSlugs
 function buildLink(slug) {
   const pageStore = usePageStore()
   const specialSlugs = pageStore.specialSlugs
@@ -46,6 +46,7 @@ function buildLink(slug) {
       >
         {{ item.name }}
       </NuxtLink>
+      <!-- Hide the button when no more data is available -->
       <button class="px-3 py-2 font-bold text-white bg-blue-500 rounded hover:bg-blue-600 focus:outline-none" @click="count++">
         Load more
       </button>
