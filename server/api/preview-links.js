@@ -10,6 +10,7 @@ const endpoint = runtimeConfig.public.datocms.endpoint
 const environment = runtimeConfig.public.datocms.environment
 const token = runtimeConfig.public.datocms.draftEnabledToken
 const secret = runtimeConfig.previewModePassword
+const previewHost = runtimeConfig.datocmsPreviewHost
 
 async function loadData(query, pageId) {
   const { data } = await $fetch(endpoint, {
@@ -59,8 +60,6 @@ async function generateRedirectUrl({ item, itemType }) {
 }
 
 export default eventHandler(async (event) => {
-  const hostname = process.env.DEPLOY_PRIME_URL
-
   setResponseHeaders(event, {
     'Content-Type': 'application/json',
     'Access-Control-Allow-Origin': '*',
@@ -80,11 +79,11 @@ export default eventHandler(async (event) => {
     previewLinks: [
       {
         label: '🔍 Preview',
-        url: `${hostname}/api/enable-preview?secret=${secret}&redirect=${redirect}`,
+        url: `${previewHost}/api/enable-preview?secret=${secret}&redirect=${redirect}`,
       },
       {
         label: '⚡ Live',
-        url: `${hostname}/api/disable-preview?redirect=${redirect}`,
+        url: `${previewHost}/api/disable-preview?redirect=${redirect}`,
       },
     ],
   }

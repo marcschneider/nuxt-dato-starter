@@ -11,6 +11,7 @@ export default defineNuxtConfig({
   runtimeConfig: {
     previewModeEncryptionSecret: process.env.NUXT_ENV_PREVIEW_MODE_ENCRYPTION_SECRET,
     previewModePassword: process.env.NUXT_ENV_PREVIEW_MODE_PASSWORD,
+    datocmsPreviewHost: process.env.NUXT_ENV_DATOCMS_PREVIEW_HOST,
     public: {
       datocms: {
         bundleSafeToken: process.env.NUXT_ENV_DATOCMS_API_BUNDLE_SAFE_TOKEN,
