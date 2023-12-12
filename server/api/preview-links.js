@@ -45,7 +45,7 @@ const typeMapping = {
   },
 }
 
-async function generatePreviewUrl({ item, itemType }) {
+async function generateRedirectUrl({ item, itemType }) {
   const itemId = item.id
   const type = itemType.attributes.api_key
 
@@ -69,17 +69,17 @@ export default eventHandler(async (event) => {
   if (event.node.req.method === 'OPTIONS')
     return send(event, 'ok')
 
-  const url = await generatePreviewUrl(await readBody(event))
+  const redirect = await generateRedirectUrl(await readBody(event))
 
   return {
     previewLinks: [
       {
         label: '🔍 Vorschau',
-        url: `${baseUrl}/api/enable-preview?secret=${secret}&redirect==${url}`,
+        url: `${baseUrl}/api/enable-preview?secret=${secret}&redirect==${redirect}`,
       },
       {
         label: '⚡ Live',
-        url: `${baseUrl}/api/disable-preview?redirect==${url}`,
+        url: `${baseUrl}/api/disable-preview?redirect==${redirect}`,
       },
     ],
   }
