@@ -1,5 +1,8 @@
-export const allTeamMembers = `
+export const allTeamMembersQuery = `
   query ($count: IntType) {
+    _allTeamsMeta {
+      count
+    }
     allTeams(first: $count) {
       id
       name

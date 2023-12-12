@@ -1,7 +1,8 @@
 <script setup>
-import { allTeamMembers } from '~/graphql/queries'
+import { allTeamMembersQuery } from '~/graphql/queries'
 
 const count = ref(1)
+const countIncrement = 1
 
 // Use useGraphqlQuery composable instead
 const runtimeConfig = useRuntimeConfig()
@@ -14,7 +15,7 @@ const { data } = await useFetch('https://graphql.datocms.com', {
     'X-Include-Drafts': 'true',
   },
   body: {
-    query: allTeamMembers,
+    query: allTeamMembersQuery,
     variables: {
       count,
     },
@@ -23,6 +24,13 @@ const { data } = await useFetch('https://graphql.datocms.com', {
   watch: [count],
 })
 
+const maxCount = computed(() => {
+  return data.value.data._allTeamsMeta.count
+})
+
+const allTeamMembers = computed(() => {
+  return data.value.data.allTeams
+})
 </script>
 
 <template>
@@ -32,15 +40,18 @@ const { data } = await useFetch('https://graphql.datocms.com', {
         All team members
       </h2>
       <NuxtLink
-        v-for="item in data.data.allTeams"
-        :key="item.id"
+        v-for="member in allTeamMembers"
+        :key="member.id"
         class="block p-6 mb-6 shadow-md w-72"
-        :to="generateSpecialUrl(item.slug)"
+        :to="generateSpecialUrl(member.slug)"
       >
-        {{ item.name }}
+        {{ member.name }}
       </NuxtLink>
-      <!-- Hide the button when no more data is available -->
-      <button class="px-3 py-2 font-bold text-white bg-blue-500 rounded hover:bg-blue-600 focus:outline-none" @click="count++">
+      <button
+        v-if="count < maxCount"
+        class="px-3 py-2 font-bold text-white bg-blue-500 rounded hover:bg-blue-600 focus:outline-none"
+        @click="count += countIncrement"
+      >
         Load more
       </button>
     </div>
