@@ -3,7 +3,7 @@ import { allTeamMembers } from '~/graphql/queries'
 
 const count = ref(1)
 
-// Use useGraphqlQuery instead
+// Use useGraphqlQuery composable instead
 const runtimeConfig = useRuntimeConfig()
 const token = runtimeConfig.public.datocms.draftEnabledToken
 const { data } = await useFetch('https://graphql.datocms.com', {
@@ -19,7 +19,7 @@ const { data } = await useFetch('https://graphql.datocms.com', {
       count,
     },
   },
-  // Add dynamic overwrite for watch to useGraphqlQuery
+  // Add dynamic overwrite for watch to useGraphqlQuery composable
   watch: [count],
 })
 
