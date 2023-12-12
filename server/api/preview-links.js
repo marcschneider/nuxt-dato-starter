@@ -49,7 +49,7 @@ async function loadData(pageId) {
 async function generatePreviewUrl(body) {
   const { item } = body
 
-  return item
+  return JSON.stringify(item)
 
   // const { item, itemType, locale } = body
   // const data = await loadData(item.id) // 94688351 //94512920 //93760636
