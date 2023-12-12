@@ -85,7 +85,7 @@ export default eventHandler(async (event) => {
     return send(event, 'ok')
 
   // const url = await generatePreviewUrl(await readBody(event))
-  console.log(await readBody(event))
+  console.log('foo')
   const url2 = '/about'
 
   return {
