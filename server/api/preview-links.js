@@ -37,11 +37,11 @@ const typeMapping = {
   },
   blog: {
     query: previewLinkBlogQuery,
-    url: data => `/${data.setting.specialSlugBlog}/${data.blog.slug}`,
+    url: data => `/${data.setting.specialSlugBlog.replace(/^\/|\/$/g, '')}/${data.blog.slug}`,
   },
   team: {
     query: previewLinkTeamQuery,
-    url: data => `/${data.setting.specialSlugTeam}/${data.team.slug}`,
+    url: data => `/${data.setting.specialSlugTeam.replace(/^\/|\/$/g, '')}/${data.team.slug}`,
   },
 }
 
