@@ -1,5 +1,5 @@
 export const previewLinkPageQuery = `
-  query Page($pageId: ItemId) {
+  query ($pageId: ItemId) {
     page(filter: {id: {eq: $pageId}}) {
       slug
       parent {
@@ -12,8 +12,30 @@ export const previewLinkPageQuery = `
   }
 `
 
+export const previewLinkBlogQuery = `
+  query ($pageId: ItemId) {
+    setting {
+      specialSlugBlog
+    }
+    blog(filter: {id: {eq: $pageId}}) {
+      slug
+    }
+  }
+`
+
+export const previewLinkTeamQuery = `
+  query ($pageId: ItemId) {
+    setting {
+      specialSlugTeam
+    }
+    team(filter: {id: {eq: $pageId}}) {
+      slug
+    }
+  }
+`
+
 export const menuHeaderQuery = `
-  query MenuHeaderQuery {
+  query {
     layout {
       menuHeader {
         id

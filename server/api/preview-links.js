@@ -1,11 +1,16 @@
-import { previewLinkPageQuery } from '~/graphql/queries'
+import {
+  previewLinkBlogQuery,
+  previewLinkPageQuery,
+  previewLinkTeamQuery,
+} from '~/graphql/queries'
+import generateCommonUrl from '~/composables/generateCommonUrl'
 
 const runtimeConfig = useRuntimeConfig()
 const endpoint = runtimeConfig.public.datocms.endpoint
 const environment = runtimeConfig.public.datocms.environment
 const token = runtimeConfig.public.datocms.draftEnabledToken
 
-async function loadData(pageId) {
+async function loadData(query, pageId) {
   const { data } = await $fetch(endpoint, {
     method: 'POST',
     headers: {
@@ -14,7 +19,7 @@ async function loadData(pageId) {
       'X-Environment': environment,
     },
     body: {
-      query: previewLinkPageQuery,
+      query,
       variables: {
         pageId,
       },
@@ -23,32 +28,32 @@ async function loadData(pageId) {
   return data || null
 }
 
-async function generatePreviewUrl(body) {
-  const { item } = body
+const typeMapping = {
+  page: {
+    query: previewLinkPageQuery,
+    url: data => generateCommonUrl(data.page),
+  },
+  blog: {
+    query: previewLinkBlogQuery,
+    url: data => `/${data.setting.specialSlugBlog}/${data.blog.slug}`,
+  },
+  team: {
+    query: previewLinkTeamQuery,
+    url: data => `/${data.setting.specialSlugTeam}/${data.team.slug}`,
+  },
+}
 
-  // const { item, itemType, locale } = body
-  const data = await loadData(item.id) // 94688351 //94512920 //93760636
+async function generatePreviewUrl({ item, itemType }) {
+  const itemId = item.id
+  const type = itemType.attributes.api_ke
 
-  // const url = generateCommonUrl(data.data.page)
+  if (!typeMapping[type])
+    return null
 
-  return JSON.stringify(data)
+  const data = await loadData(typeMapping[type].query, itemId)
+  const url = typeMapping[type].url(data)
 
-  // if (url)
-  //   return url
-  // else
-  //   return null
-
-  // switch (itemType.attributes.api_key) {
-  //   case 'page':
-  //     url = generateUrl()
-  //     return `page/${item.id}/${url}`
-  //   case 'blog':
-  //     return `blog/${item.id}`
-  //   case 'team':
-  //     return `team/${item.id}`
-  //   default:
-  //     return null
-  // }
+  return url
 }
 
 export default eventHandler(async (event) => {
