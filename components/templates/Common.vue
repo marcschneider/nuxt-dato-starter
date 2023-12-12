@@ -17,6 +17,7 @@ function dynamicComponent(section) {
 </script>
 
 <template>
+  <SectionsAllTeamMembers />
   <component
     :is="dynamicComponent(section)"
     v-for="(section, index) in pageData.content"

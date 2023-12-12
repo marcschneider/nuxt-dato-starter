@@ -1,3 +1,13 @@
+export const allTeamMembers = `
+  query ($count: IntType) {
+    allTeams(first: $count) {
+      id
+      name
+      slug
+    }
+  }
+`
+
 export const previewLinkPageQuery = `
   query ($pageId: ItemId) {
     page(filter: {id: {eq: $pageId}}) {
