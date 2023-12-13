@@ -22,7 +22,8 @@ const allTeamFilters = computed(() => {
 
 const count = ref(initialCount)
 const countIncrement = ref(increment)
-const currentFilterId = ref(allTeamFilters.value[0].id)
+const initialFilterId = router.currentRoute.value.query.filter || allTeamFilters.value[0].id
+const currentFilterId = ref(initialFilterId)
 
 const { data: memberData } = await useGraphqlQuery({
   subscription: false,
