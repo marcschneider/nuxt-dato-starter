@@ -47,11 +47,6 @@ const allTeamMembers = computed(() => {
 const allTeamFilters = computed(() => {
   return data.value.data.allTeamFilters || null
 })
-
-// Works just on client side
-// onMounted(() => {
-//   setFilter(allTeamFilters.value[0].id)
-// })
 </script>
 
 <template>
