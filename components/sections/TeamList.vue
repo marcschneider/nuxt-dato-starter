@@ -8,6 +8,7 @@ const router = useRouter()
 
 const initialCount = 1
 const increment = 1
+const textLoadMore = 'Load more'
 
 const { data: filterData } = await useGraphqlQuery({
   query: allTeamFiltersQuery,
@@ -52,17 +53,16 @@ const allTeamMembers = computed(() => {
 </script>
 
 <template>
-  <ElementsContainer>
+  <ElementsContainer class="mt-10">
     <div class="col-span-full">
-      <h2 class="mb-6 text-xl font-bold">
-        All team members
-      </h2>
-      <nav v-if="allTeamFilters" class="flex gap-4">
+      <nav v-if="allTeamFilters" class="flex gap-2 mb-4">
         <button
           v-for="filter in allTeamFilters"
           :key="filter.id"
+          class="px-3 py-1 rounded-full typography-base"
           :class="{
-            'bg-blue-500': currentFilterId === filter.id,
+            'bg-black text-white': currentFilterId === filter.id,
+            'hover:bg-gray-100': currentFilterId !== filter.id,
           }"
           :aria-label="`Filter by ${filter.name}`"
           @click="setFilter(filter.id, filter.name)"
@@ -70,22 +70,21 @@ const allTeamMembers = computed(() => {
           {{ filter.name }}
         </button>
       </nav>
-      <NuxtLink
-        v-for="member in allTeamMembers"
-        :key="member.id"
-        class="block p-6 mb-6 shadow-md w-72"
-        :to="generateSpecialUrl(member.slug)"
-      >
-        {{ member.name }}
-      </NuxtLink>
-      <button
+      <div class="flex flex-col mb-4">
+        <ElementsTeamItem
+          v-for="member in allTeamMembers"
+          :key="member.id"
+          :member="member"
+        />
+      </div>
+      <ElementsButton
         v-if="count < maxCount"
-        class="px-3 py-2 font-bold text-white bg-blue-500 rounded hover:bg-blue-600 focus-visible:ring-2 focus-visible:ring-blue-500"
+        type="secondary"
         aria-label="Load more team members"
         @click="count += countIncrement"
       >
-        Load more
-      </button>
+        {{ textLoadMore }}
+      </ElementsButton>
     </div>
   </ElementsContainer>
 </template>
