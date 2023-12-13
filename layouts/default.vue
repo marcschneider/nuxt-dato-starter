@@ -1,6 +1,7 @@
 <script setup>
 const pageStore = usePageStore()
 await pageStore.loadSpecialSlugs()
+await pageStore.loadFixedTexts()
 
 const cookie = useCookie(PREVIEW_MODE_COOKIE_NAME)
 const isPreview = computed(() => !!cookie.value)

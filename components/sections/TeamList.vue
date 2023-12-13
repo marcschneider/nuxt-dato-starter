@@ -5,10 +5,11 @@ import {
 } from '~/graphql/queries'
 
 const router = useRouter()
+const pageStore = usePageStore()
 
 const INITIAL_COUNT = 1
 const INCREMENT = 1
-const TEXT_LOAD_MORE = 'Load more'
+const TEXT_LOAD_MORE = pageStore.fixedTexts.buttonLoadMore
 
 const { data: filterData } = await useGraphqlQuery({
   query: allTeamFiltersQuery,

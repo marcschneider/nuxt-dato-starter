@@ -97,6 +97,14 @@ export const matchingSlugsQuery = `
   }
 `
 
+export const fixedTextsQuery = `
+  query {
+    layout {
+      buttonLoadMore
+    }
+  }
+`
+
 export const specialSlugsQuery = `
   query {
     setting {
