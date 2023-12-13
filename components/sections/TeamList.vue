@@ -1,7 +1,6 @@
 <script setup>
 import { allTeamMembersQuery } from '~/graphql/queries'
 
-// Add the component to the cms
 // How the data is sorted is unclear -> Fix it
 
 const initialCount = ref(1)

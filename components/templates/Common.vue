@@ -9,6 +9,7 @@ defineProps({
 const components = {
   section_title: resolveComponent('SectionsTitle'),
   section_rich_text: resolveComponent('SectionsRichText'),
+  section_team_list: resolveComponent('SectionsTeamList'),
 }
 
 function dynamicComponent(section) {
@@ -17,7 +18,6 @@ function dynamicComponent(section) {
 </script>
 
 <template>
-  <SectionsAllTeamMembers />
   <component
     :is="dynamicComponent(section)"
     v-for="(section, index) in pageData.content"

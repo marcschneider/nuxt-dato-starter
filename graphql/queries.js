@@ -124,6 +124,13 @@ export const responsiveImage = `
   }
 `
 
+export const sectionTeamList = `
+  fragment SectionTeamListRecordFields on SectionTeamListRecord {
+    _modelApiKey
+    id
+  }
+`
+
 export const sectionRichText = `
   ${responsiveImage}
 
@@ -174,12 +181,14 @@ export const sectionRichText = `
 export const commonContentQuery = `
   ${sectionTitle}  
   ${sectionRichText}
+  ${sectionTeamList}
 
   query ($id: ItemId) {
     page(filter: {id: {eq: $id}}) {
       content {
         ... SectionTitleRecordFields
         ... SectionRichTextRecordFields
+        ... SectionTeamListRecordFields
       }
       _seoMetaTags {
         attributes
