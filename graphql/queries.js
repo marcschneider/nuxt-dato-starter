@@ -1,9 +1,14 @@
-export const allTeamMembersQuery = `
-  query ($currentFilterId: [ItemId], $count: IntType) {
+export const allTeamFiltersQuery = `
+  query {
     allTeamFilters {
       id
       name
     }
+  }
+`
+
+export const allTeamMembersQuery = `
+  query ($currentFilterId: [ItemId], $count: IntType) {
     _allTeamsMeta(filter: {filter: {allIn: $currentFilterId}}) {
       count
     }

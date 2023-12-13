@@ -1,16 +1,26 @@
 <script setup>
-import { allTeamMembersQuery } from '~/graphql/queries'
+import {
+  allTeamFiltersQuery,
+  allTeamMembersQuery,
+} from '~/graphql/queries'
 
-// Add initial filter on page load
 // Add simple layout and remove all unnecessary design
 // Add filter changes to url
+
+const { data: filter } = await useGraphqlQuery({
+  query: allTeamFiltersQuery,
+})
+
+const allTeamFilters = computed(() => {
+  return filter.value?.allTeamFilters || null
+})
 
 const initialCount = ref(1)
 const count = ref(1)
 const countIncrement = ref(1)
-const currentFilterId = ref('')
+const currentFilterId = ref(allTeamFilters.value[0].id)
 
-const { data } = await useGraphqlQuery({
+const { data: members } = await useGraphqlQuery({
   subscription: false,
   query: allTeamMembersQuery,
   variables: {
@@ -25,15 +35,11 @@ function setFilter(id) {
 }
 
 const maxCount = computed(() => {
-  return data.value?._allTeamsMeta.count || null
+  return members.value?._allTeamsMeta.count || null
 })
 
 const allTeamMembers = computed(() => {
-  return data.value?.allTeams || null
-})
-
-const allTeamFilters = computed(() => {
-  return data.value?.allTeamFilters || null
+  return members.value?.allTeams || null
 })
 </script>
 
