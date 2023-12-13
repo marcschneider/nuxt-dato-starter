@@ -55,21 +55,12 @@ const allTeamMembers = computed(() => {
 <template>
   <ElementsContainer class="mt-10">
     <div class="col-span-full">
-      <nav v-if="allTeamFilters" class="flex gap-2 mb-4">
-        <button
-          v-for="filter in allTeamFilters"
-          :key="filter.id"
-          class="px-3 py-1 rounded-full typography-base"
-          :class="{
-            'bg-black text-white': currentFilterId === filter.id,
-            'hover:bg-gray-100': currentFilterId !== filter.id,
-          }"
-          :aria-label="`Filter by ${filter.name}`"
-          @click="setFilter(filter.id, filter.name)"
-        >
-          {{ filter.name }}
-        </button>
-      </nav>
+      <ElementsFilter
+        v-if="allTeamFilters"
+        :all-filters="allTeamFilters"
+        :current-filter-id="currentFilterId"
+        @set-filter="setFilter"
+      />
       <div class="flex flex-col mb-4">
         <ElementsTeamItem
           v-for="member in allTeamMembers"
