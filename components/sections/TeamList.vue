@@ -20,13 +20,10 @@ const allTeamFilters = computed(() => {
 const count = ref(initialCount)
 const countIncrement = ref(increment)
 
-function urlFriendlyName(name) {
-  return name.toLowerCase().replace(/\s+/g, '-').replace(/[^\w\-]+/g, '')
-}
-
 const initialFilterName = router.currentRoute.value.query.filter
 const initialFilter = allTeamFilters.value.find(filter => urlFriendlyName(filter.name) === initialFilterName)
 const initialFilterId = initialFilter ? initialFilter.id : allTeamFilters.value[0].id
+
 const currentFilterId = ref(initialFilterId)
 
 const { data: memberData } = await useGraphqlQuery({
@@ -41,6 +38,7 @@ const { data: memberData } = await useGraphqlQuery({
 function setFilter(id, name) {
   currentFilterId.value = id
   count.value = initialCount
+
   router.push({ query: { filter: urlFriendlyName(name) } })
 }
 
