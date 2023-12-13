@@ -10,25 +10,12 @@ const count = ref(1)
 const countIncrement = ref(1)
 const currentFilterId = ref('')
 
-// Use useGraphqlQuery composable instead
-const runtimeConfig = useRuntimeConfig()
-const token = runtimeConfig.public.datocms.draftEnabledToken
-const { data } = await useFetch('https://graphql.datocms.com', {
-  method: 'POST',
-  headers: {
-    'Content-Type': 'application/json',
-    'Authorization': `Bearer ${token}`,
-    'X-Include-Drafts': 'true',
+const { data } = await useGraphqlQuery({
+  query: allTeamMembersQuery,
+  variables: {
+    count,
+    currentFilterId,
   },
-  body: {
-    query: allTeamMembersQuery,
-    variables: {
-      count,
-      currentFilterId,
-    },
-  },
-  // Add dynamic overwrite for watch to useGraphqlQuery composable
-  watch: [count, currentFilterId],
 })
 
 function setFilter(id) {
@@ -37,15 +24,15 @@ function setFilter(id) {
 }
 
 const maxCount = computed(() => {
-  return data.value.data._allTeamsMeta.count
+  return data.value._allTeamsMeta.count
 })
 
 const allTeamMembers = computed(() => {
-  return data.value.data.allTeams
+  return data.value.allTeams
 })
 
 const allTeamFilters = computed(() => {
-  return data.value.data.allTeamFilters || null
+  return data.value.allTeamFilters || null
 })
 </script>
 

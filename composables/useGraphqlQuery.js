@@ -1,6 +1,6 @@
 import { useQuerySubscription } from 'vue-datocms'
 
-export default async ({ query, variables = {} }) => {
+export default async ({ query, variables = {}, options }) => {
   const runtimeConfig = useRuntimeConfig()
 
   const endpoint = runtimeConfig.public.datocms.endpoint
@@ -17,6 +17,7 @@ export default async ({ query, variables = {} }) => {
     query,
     variables,
     environment,
+    options,
   })
 
   if (isClient && preview) {
@@ -33,9 +34,7 @@ export default async ({ query, variables = {} }) => {
   return { data: initialData }
 }
 
-async function fetchPublished({ endpoint, token, preview, query, variables, environment }) {
-  const normalizedData = ref(null)
-
+async function fetchPublished({ endpoint, token, preview, query, variables, environment, options }) {
   const { data, error } = await useFetch(endpoint, {
     key: JSON.stringify({ query, variables }),
     method: 'POST',
@@ -49,6 +48,7 @@ async function fetchPublished({ endpoint, token, preview, query, variables, envi
       query,
       variables,
     },
+    ...options,
   })
 
   // Network error
@@ -65,7 +65,9 @@ async function fetchPublished({ endpoint, token, preview, query, variables, envi
     })
   }
 
-  normalizedData.value = data.value.data
+  const normalizedData = computed(() => {
+    return data.value.data
+  })
 
   return normalizedData
 }
