@@ -4,6 +4,8 @@ import {
   allTeamMembersQuery,
 } from '~/graphql/queries'
 
+const router = useRouter()
+
 const initialCount = 1
 const increment = 1
 
@@ -34,6 +36,8 @@ const { data: memberData } = await useGraphqlQuery({
 function setFilter(id) {
   currentFilterId.value = id
   count.value = initialCount
+
+  router.push({ query: { filter: id } })
 }
 
 const maxCount = computed(() => {
