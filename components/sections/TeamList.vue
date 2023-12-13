@@ -18,14 +18,13 @@ const allTeamFilters = computed(() => {
   return filterData.value?.allTeamFilters || null
 })
 
-const count = ref(initialCount)
-const countIncrement = ref(increment)
-
 const initialFilterName = router.currentRoute.value.query.filter
 const initialFilter = allTeamFilters.value.find(filter => urlFriendlyName(filter.name) === initialFilterName)
 const initialFilterId = initialFilter ? initialFilter.id : allTeamFilters.value[0].id
 
 const currentFilterId = ref(initialFilterId)
+const count = ref(initialCount)
+const countIncrement = ref(increment)
 
 const { data: memberData } = await useGraphqlQuery({
   subscription: false,
