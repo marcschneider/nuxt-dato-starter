@@ -6,9 +6,9 @@ import {
 
 const router = useRouter()
 
-const initialCount = 1
-const increment = 1
-const textLoadMore = 'Load more'
+const INITIAL_COUNT = 1
+const INCREMENT = 1
+const TEXT_LOAD_MORE = 'Load more'
 
 const { data: filterData } = await useGraphqlQuery({
   query: allTeamFiltersQuery,
@@ -23,8 +23,8 @@ const initialFilter = allTeamFilters.value.find(filter => urlFriendlyName(filter
 const initialFilterId = initialFilter ? initialFilter.id : allTeamFilters.value[0].id
 
 const currentFilterId = ref(initialFilterId)
-const count = ref(initialCount)
-const countIncrement = ref(increment)
+const count = ref(INITIAL_COUNT)
+const countIncrement = ref(INCREMENT)
 
 const { data: memberData } = await useGraphqlQuery({
   subscription: false,
@@ -41,7 +41,7 @@ function setCount() {
 
 function setFilter(id, name) {
   currentFilterId.value = id
-  count.value = initialCount
+  count.value = INITIAL_COUNT
 
   router.push({ query: { filter: urlFriendlyName(name) } })
 }
@@ -61,7 +61,7 @@ watch(() => router.currentRoute.value, (newRoute) => {
 
   if (newFilterId !== currentFilterId.value) {
     currentFilterId.value = newFilterId
-    count.value = initialCount
+    count.value = INITIAL_COUNT
   }
 })
 </script>
@@ -87,7 +87,7 @@ watch(() => router.currentRoute.value, (newRoute) => {
         type="secondary"
         @click="setCount"
       >
-        {{ textLoadMore }}
+        {{ TEXT_LOAD_MORE }}
       </ElementsButton>
     </div>
   </ElementsContainer>
