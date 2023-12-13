@@ -57,18 +57,19 @@ const allTeamMembers = computed(() => {
       <h2 class="mb-6 text-xl font-bold">
         All team members
       </h2>
-      <div v-if="allTeamFilters" class="flex gap-4">
+      <nav v-if="allTeamFilters" class="flex gap-4">
         <button
           v-for="filter in allTeamFilters"
           :key="filter.id"
           :class="{
             'bg-blue-500': currentFilterId === filter.id,
           }"
+          :aria-label="`Filter by ${filter.name}`"
           @click="setFilter(filter.id, filter.name)"
         >
           {{ filter.name }}
         </button>
-      </div>
+      </nav>
       <NuxtLink
         v-for="member in allTeamMembers"
         :key="member.id"
@@ -79,7 +80,8 @@ const allTeamMembers = computed(() => {
       </NuxtLink>
       <button
         v-if="count < maxCount"
-        class="px-3 py-2 font-bold text-white bg-blue-500 rounded hover:bg-blue-600 focus:outline-none"
+        class="px-3 py-2 font-bold text-white bg-blue-500 rounded hover:bg-blue-600 focus-visible:ring-2 focus-visible:ring-blue-500"
+        aria-label="Load more team members"
         @click="count += countIncrement"
       >
         Load more
