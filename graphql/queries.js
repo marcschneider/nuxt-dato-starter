@@ -4,7 +4,7 @@ export const allTeamMembersQuery = `
       id
       name
     }
-    _allTeamsMeta {
+    _allTeamsMeta(filter: {filter: {allIn: $currentFilterId}}) {
       count
     }
     allTeams(filter: {filter: {allIn: $currentFilterId}}, first: $count) {

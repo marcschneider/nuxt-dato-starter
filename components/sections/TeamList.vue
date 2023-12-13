@@ -63,10 +63,10 @@ const allTeamFilters = computed(() => {
         <button
           v-for="filter in allTeamFilters"
           :key="filter.id"
-          @click="setFilter(filter.id)"
           :class="{
             'bg-blue-500': currentFilterId === filter.id,
           }"
+          @click="setFilter(filter.id)"
         >
           {{ filter.name }}
         </button>
@@ -79,7 +79,6 @@ const allTeamFilters = computed(() => {
       >
         {{ member.name }}
       </NuxtLink>
-      <!-- The max count should also be reactive and respect the data limit inclusive the filter -->
       <button
         v-if="count < maxCount"
         class="px-3 py-2 font-bold text-white bg-blue-500 rounded hover:bg-blue-600 focus:outline-none"
