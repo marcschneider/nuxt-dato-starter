@@ -48,9 +48,9 @@ const allTeamFilters = computed(() => {
 })
 
 // Works just on client side
-onMounted(() => {
-  setFilter(allTeamFilters.value[0].id)
-})
+// onMounted(() => {
+//   setFilter(allTeamFilters.value[0].id)
+// })
 </script>
 
 <template>
