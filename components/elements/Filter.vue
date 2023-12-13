@@ -22,7 +22,6 @@ defineEmits(['setFilter'])
         'bg-black text-white': currentFilterId === filter.id,
         'hover:bg-gray-100': currentFilterId !== filter.id,
       }"
-      :aria-label="`Filter by ${filter.name}`"
       @click="$emit('setFilter', filter.id, filter.name)"
     >
       {{ filter.name }}

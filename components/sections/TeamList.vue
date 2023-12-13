@@ -70,7 +70,6 @@ const allTeamMembers = computed(() => {
       <ElementsButton
         v-if="count < maxCount"
         type="secondary"
-        aria-label="Load more team members"
         @click="count += countIncrement"
       >
         {{ textLoadMore }}
