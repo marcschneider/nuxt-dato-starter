@@ -10,19 +10,19 @@ const increment = 1
 // Add simple layout and remove all unnecessary design
 // Add filter changes to url
 
-const { data: filter } = await useGraphqlQuery({
+const { data: filterData } = await useGraphqlQuery({
   query: allTeamFiltersQuery,
 })
 
 const allTeamFilters = computed(() => {
-  return filter.value?.allTeamFilters || null
+  return filterData.value?.allTeamFilters || null
 })
 
 const count = ref(initialCount)
 const countIncrement = ref(increment)
 const currentFilterId = ref(allTeamFilters.value[0].id)
 
-const { data: members } = await useGraphqlQuery({
+const { data: memberData } = await useGraphqlQuery({
   subscription: false,
   query: allTeamMembersQuery,
   variables: {
@@ -37,11 +37,11 @@ function setFilter(id) {
 }
 
 const maxCount = computed(() => {
-  return members.value?._allTeamsMeta.count || null
+  return memberData.value?._allTeamsMeta.count || null
 })
 
 const allTeamMembers = computed(() => {
-  return members.value?.allTeams || null
+  return memberData.value?.allTeams || null
 })
 </script>
 
