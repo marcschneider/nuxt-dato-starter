@@ -9,8 +9,6 @@ const router = useRouter()
 const initialCount = 1
 const increment = 1
 
-// Add simple layout and remove all unnecessary design
-
 const { data: filterData } = await useGraphqlQuery({
   query: allTeamFiltersQuery,
 })
