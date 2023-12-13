@@ -2,6 +2,7 @@
 import { allTeamMembersQuery } from '~/graphql/queries'
 
 // How the data is sorted is unclear -> Fix it
+// Add simple layout and remove all unnecessary design
 
 const initialCount = ref(1)
 const count = ref(1)
