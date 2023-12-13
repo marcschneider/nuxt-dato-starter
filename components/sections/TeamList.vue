@@ -7,7 +7,7 @@ import { allTeamMembersQuery } from '~/graphql/queries'
 const initialCount = ref(1)
 const count = ref(1)
 const countIncrement = ref(1)
-const filterId = ref('')
+const currentFilterId = ref('')
 
 // Use useGraphqlQuery composable instead
 const runtimeConfig = useRuntimeConfig()
@@ -23,15 +23,15 @@ const { data } = await useFetch('https://graphql.datocms.com', {
     query: allTeamMembersQuery,
     variables: {
       count,
-      filterId,
+      currentFilterId,
     },
   },
   // Add dynamic overwrite for watch to useGraphqlQuery composable
-  watch: [count, filterId],
+  watch: [count, currentFilterId],
 })
 
 function setFilter(id) {
-  filterId.value = id
+  currentFilterId.value = id
   count.value = initialCount.value
 }
 
@@ -60,8 +60,14 @@ onMounted(() => {
         All team members
       </h2>
       <div v-if="allTeamFilters" class="flex gap-4">
-        <!-- Mark active filter -->
-        <button v-for="filter in allTeamFilters" :key="filter.id" @click="setFilter(filter.id)">
+        <button
+          v-for="filter in allTeamFilters"
+          :key="filter.id"
+          @click="setFilter(filter.id)"
+          :class="{
+            'bg-blue-500': currentFilterId === filter.id,
+          }"
+        >
           {{ filter.name }}
         </button>
       </div>
