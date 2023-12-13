@@ -1,12 +1,20 @@
 export const allTeamMembersQuery = `
-  query ($count: IntType) {
+  query ($filterId: [ItemId], $count: IntType) {
+    allTeamFilters {
+      id
+      name
+    }
     _allTeamsMeta {
       count
     }
-    allTeams(first: $count) {
+    allTeams(filter: {filter: {allIn: $filterId}}, first: $count) {
       id
       name
       slug
+      filter {
+        id
+        name
+      }
     }
   }
 `
