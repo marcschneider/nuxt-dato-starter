@@ -1,7 +1,7 @@
 <script setup>
 import { allTeamMembersQuery } from '~/graphql/queries'
 
-// How the data is sorted is unclear -> Fix it
+// Add initial filter on page load
 // Add simple layout and remove all unnecessary design
 // Add filter changes to url
 
@@ -11,6 +11,7 @@ const countIncrement = ref(1)
 const currentFilterId = ref('')
 
 const { data } = await useGraphqlQuery({
+  subscription: false,
   query: allTeamMembersQuery,
   variables: {
     count,
@@ -24,15 +25,15 @@ function setFilter(id) {
 }
 
 const maxCount = computed(() => {
-  return data.value._allTeamsMeta.count
+  return data.value?._allTeamsMeta.count || null
 })
 
 const allTeamMembers = computed(() => {
-  return data.value.allTeams
+  return data.value?.allTeams || null
 })
 
 const allTeamFilters = computed(() => {
-  return data.value.allTeamFilters || null
+  return data.value?.allTeamFilters || null
 })
 </script>
 

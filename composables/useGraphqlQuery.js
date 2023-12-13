@@ -1,6 +1,6 @@
 import { useQuerySubscription } from 'vue-datocms'
 
-export default async ({ query, variables = {}, options }) => {
+export default async ({ query, variables = {}, options, subscription = true }) => {
   const runtimeConfig = useRuntimeConfig()
 
   const endpoint = runtimeConfig.public.datocms.endpoint
@@ -20,7 +20,7 @@ export default async ({ query, variables = {}, options }) => {
     options,
   })
 
-  if (isClient && preview) {
+  if (isClient && preview && subscription) {
     return useQuerySubscription({
       query,
       variables,
