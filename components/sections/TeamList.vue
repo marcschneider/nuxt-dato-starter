@@ -10,7 +10,6 @@ const initialCount = 1
 const increment = 1
 
 // Add simple layout and remove all unnecessary design
-// Add filter changes to url
 
 const { data: filterData } = await useGraphqlQuery({
   query: allTeamFiltersQuery,
@@ -22,7 +21,14 @@ const allTeamFilters = computed(() => {
 
 const count = ref(initialCount)
 const countIncrement = ref(increment)
-const initialFilterId = router.currentRoute.value.query.filter || allTeamFilters.value[0].id
+
+function urlFriendlyName(name) {
+  return name.toLowerCase().replace(/\s+/g, '-').replace(/[^\w\-]+/g, '')
+}
+
+const initialFilterName = router.currentRoute.value.query.filter
+const initialFilter = allTeamFilters.value.find(filter => urlFriendlyName(filter.name) === initialFilterName)
+const initialFilterId = initialFilter ? initialFilter.id : allTeamFilters.value[0].id
 const currentFilterId = ref(initialFilterId)
 
 const { data: memberData } = await useGraphqlQuery({
@@ -34,11 +40,10 @@ const { data: memberData } = await useGraphqlQuery({
   },
 })
 
-function setFilter(id) {
+function setFilter(id, name) {
   currentFilterId.value = id
   count.value = initialCount
-
-  router.push({ query: { filter: id } })
+  router.push({ query: { filter: urlFriendlyName(name) } })
 }
 
 const maxCount = computed(() => {
@@ -63,7 +68,7 @@ const allTeamMembers = computed(() => {
           :class="{
             'bg-blue-500': currentFilterId === filter.id,
           }"
-          @click="setFilter(filter.id)"
+          @click="setFilter(filter.id, filter.name)"
         >
           {{ filter.name }}
         </button>
