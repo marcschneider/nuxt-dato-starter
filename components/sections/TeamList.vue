@@ -35,6 +35,10 @@ const { data: memberData } = await useGraphqlQuery({
   },
 })
 
+function setCount() {
+  count.value += countIncrement.value
+}
+
 function setFilter(id, name) {
   currentFilterId.value = id
   count.value = initialCount
@@ -49,6 +53,17 @@ const maxCount = computed(() => {
 const allTeamMembers = computed(() => {
   return memberData.value?.allTeams || null
 })
+
+watch(() => router.currentRoute.value, (newRoute) => {
+  const newFilterName = newRoute.query.filter
+  const newFilter = allTeamFilters.value.find(filter => urlFriendlyName(filter.name) === newFilterName)
+  const newFilterId = newFilter ? newFilter.id : allTeamFilters.value[0].id
+
+  if (newFilterId !== currentFilterId.value) {
+    currentFilterId.value = newFilterId
+    count.value = initialCount
+  }
+})
 </script>
 
 <template>
@@ -60,7 +75,7 @@ const allTeamMembers = computed(() => {
         :current-filter-id="currentFilterId"
         @set-filter="setFilter"
       />
-      <div class="flex flex-col mb-4">
+      <div v-if="allTeamMembers" class="flex flex-col mb-4">
         <ElementsTeamItem
           v-for="member in allTeamMembers"
           :key="member.id"
@@ -70,7 +85,7 @@ const allTeamMembers = computed(() => {
       <ElementsButton
         v-if="count < maxCount"
         type="secondary"
-        @click="count += countIncrement"
+        @click="setCount"
       >
         {{ textLoadMore }}
       </ElementsButton>
